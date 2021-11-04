@@ -1,4 +1,8 @@
-# Fulbright Q&A Forum Project
+# Team Project Foundation
+
+## Project name
+
+Fulbright Q&A Forum Web App
 
 ## Overview
 
