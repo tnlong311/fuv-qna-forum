@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+.decor{
+  position: fixed!important;
+  transform: translateY(45%);
+  z-index: -1!important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.logo{
+  max-width: fit-content;
+  
+}
+.logSignButton{
+  width: 10rem!important;
+  background-color: rgba(196,196,196,15%)!important;
+  border-color: rgba(196,196,196,15%)!important;
+  color: black!important;
+  border-radius:23px!important;
+}
+.logSignButton:active{
+  outline-color: black!important;
+  border-color: #282c34!important ;
+}
+
+.btn, .btn:focus, button, button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

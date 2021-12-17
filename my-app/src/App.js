@@ -1,24 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
-
+import React, {Component} from 'react';
+import {Image, Button, Row} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="decor" >
+      <Image src="/image/Group6.png" alt='decor'/>
+      </div>
+      <div class="container">
+      <Row>
+        <div className='mt-5 mb-5'>
+        <Image src='/image/logo_Fulbright.svg' alt='logo'/>
+        </div>
+      </Row>
+      <Row >
+        <div >
+          <Button className="mb-3 logSignButton">Login</Button>{' '}
+        </div>
+      </Row>
+      <Row >
+        <div >
+        <Button className="logSignButton">Sign up</Button>{' '}
+        </div>
+      </Row>
+      </div>
+
     </div>
+    
   );
 }
 
