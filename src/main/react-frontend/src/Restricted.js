@@ -15,14 +15,7 @@ const WelcomePage = () => {
         </div>
       </Row>
       <Row >
-        <div >
-          <Button className="mb-3 logSignButton">Login</Button>{' '}
-        </div>
-      </Row>
-      <Row >
-        <div >
-        <Button className="logSignButton">Sign up</Button>{' '}
-        </div>
+        This is the restricted area
       </Row>
       </div>
 
