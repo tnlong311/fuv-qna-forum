@@ -2,8 +2,20 @@ import {Image, Button, Row} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
+import axios from "axios";
 
 const WelcomePage = () => {
+  const fetchWelcomePage = () => {
+    axios.get("http://localhost:8080/welcome").then(res => {
+      console.log(res)
+    })
+  }
+
+  useEffect(() => {
+    fetchWelcomePage();
+  }, [])
+
   return (
     <div className="App">
       <div className="decor" >
@@ -28,7 +40,6 @@ const WelcomePage = () => {
         </div>
       </Row>
       </div>
-
     </div>
   )
 }

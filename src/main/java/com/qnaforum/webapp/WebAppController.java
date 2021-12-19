@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 /*@RequestMapping("/")*/
 @CrossOrigin(origins = "*")
 public class WebAppController {
-    @GetMapping("/")
+    @GetMapping("/welcome")
     public String helloWorld() {
         return "you don't need to be logged in";
     }
