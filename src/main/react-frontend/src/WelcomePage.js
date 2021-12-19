@@ -1,6 +1,7 @@
 import {Image, Button, Row} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import {Link} from "react-router-dom";
 
 const WelcomePage = () => {
   return (
@@ -8,7 +9,7 @@ const WelcomePage = () => {
       <div className="decor" >
       <Image src="/image/Group6.png" alt='decor'/>
       </div>
-      <div class="container">
+      <div className="container">
       <Row>
         <div className='mt-5 mb-5'>
           <Image src='/image/logo_Fulbright.svg' alt='logo'/>
@@ -16,9 +17,9 @@ const WelcomePage = () => {
       </Row>
       <Row >
         <div >
-          <link to="/Restricted">
-            <Button className="mb-3 logSignButton">Login</Button>{' '}
-          </link>
+        <Link to="/Restricted">
+          <button className="mb-3 logSignButton">Login</button>{' '}
+        </Link>
         </div>
       </Row>
       <Row >
