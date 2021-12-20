@@ -29,7 +29,7 @@ const WelcomePage = () => {
       </Row>
       <Row >
         <div >
-        <Link to="/Restricted">
+        <Link to="/restricted">
           <button className="mb-3 logSignButton">Login</button>{' '}
         </Link>
         </div>
