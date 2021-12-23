@@ -9,6 +9,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .antMatcher("/**").authorizeRequests()
                 .antMatchers(new String[]{"/", "/welcome", "/not-restricted"}).permitAll()
                 .anyRequest().authenticated()
