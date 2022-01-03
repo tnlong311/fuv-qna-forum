@@ -1,9 +1,12 @@
 package com.qnaforum.webapp;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -23,14 +26,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 cors.setAllowedOrigins(List.of("*"));
                 cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
                 cors.setAllowedHeaders(List.of("*"));
+                /*cors.setAllowedHeaders(List.of("Origin", "Content-Type", "X-Auth-Token"));*/
                 cors.setAllowedOriginPatterns(List.of("*"));
                 return cors;
             })
             .and()
             .antMatcher("/**").authorizeRequests()
-            .antMatchers(new String[]{"/", "/welcome", "/not-restricted"}).permitAll()
+            .antMatchers("/", "/welcome", "/not-restricted", "/auth/**", "/oauth2/**",
+                          "/webjars/**", "/error").permitAll()
             .anyRequest().authenticated()
             .and()
-            .oauth2Login();
+            /*.exceptionHandling(e -> e
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+            )*/
+            .csrf(c -> c
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+            .oauth2Login()
+              .defaultSuccessUrl("http://localhost:3000/welcome");
     }
 }

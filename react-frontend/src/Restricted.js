@@ -3,11 +3,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import {useEffect} from "react";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 const Restricted = () => {
+  const token = Cookies.get('XSRF-TOKEN')
+
   const fetchRestricted = () => {
-    axios.get("http://localhost:8080/restricted").then(res => {
-      console.log(res)
+    /*axios.defaults.headers.common['X-CSRF-TOKEN'] = token*/
+
+    axios.get("http://localhost:8080/user", {
+      /*headers: {
+        'X-XSRF-TOKEN': token},*/
+      /*withCredentials: true*/
+      })
+        .then(res => {
+      console.log(res.data)
     })
   }
 
