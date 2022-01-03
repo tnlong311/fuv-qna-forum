@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum.service;
+package com.qnaforum.webapp.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

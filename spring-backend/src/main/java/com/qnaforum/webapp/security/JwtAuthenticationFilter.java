@@ -1,6 +1,6 @@
-package com.FuvSoftware.QandAForum.security;
+package com.qnaforum.webapp.security;
 
-import com.FuvSoftware.QandAForum.service.CustomUserDetailsService;
+import com.qnaforum.webapp.service.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

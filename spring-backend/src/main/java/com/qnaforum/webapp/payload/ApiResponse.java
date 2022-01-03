@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum.payload;
+package com.qnaforum.webapp.payload;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

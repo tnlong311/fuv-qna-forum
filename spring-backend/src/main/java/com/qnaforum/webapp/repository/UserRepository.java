@@ -1,9 +1,9 @@
-package com.FuvSoftware.QandAForum.repository;
+package com.qnaforum.webapp.repository;
 
 
-import com.FuvSoftware.QandAForum.exception.ResourceNotFoundException;
-import com.FuvSoftware.QandAForum.model.user.User;
-import com.FuvSoftware.QandAForum.security.UserPrincipal;
+import com.qnaforum.webapp.exception.ResourceNotFoundException;
+import com.qnaforum.webapp.model.user.User;
+import com.qnaforum.webapp.security.UserPrincipal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

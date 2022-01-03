@@ -1,13 +1,13 @@
-package com.FuvSoftware.QandAForum.controller;
+package com.qnaforum.webapp.controller;
 
-import com.FuvSoftware.QandAForum.exception.QnAException;
-import com.FuvSoftware.QandAForum.model.user.User;
-import com.FuvSoftware.QandAForum.payload.ApiResponse;
-import com.FuvSoftware.QandAForum.payload.JwtAuthenticationResponse;
-import com.FuvSoftware.QandAForum.payload.LoginRequest;
-import com.FuvSoftware.QandAForum.payload.SignUpRequest;
-import com.FuvSoftware.QandAForum.repository.UserRepository;
-import com.FuvSoftware.QandAForum.security.JwtTokenProvider;
+import com.qnaforum.webapp.exception.QnAException;
+import com.qnaforum.webapp.model.user.User;
+import com.qnaforum.webapp.payload.ApiResponse;
+import com.qnaforum.webapp.payload.JwtAuthenticationResponse;
+import com.qnaforum.webapp.payload.LoginRequest;
+import com.qnaforum.webapp.payload.SignUpRequest;
+import com.qnaforum.webapp.repository.UserRepository;
+import com.qnaforum.webapp.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

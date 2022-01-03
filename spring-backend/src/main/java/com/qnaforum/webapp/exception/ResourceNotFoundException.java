@@ -1,8 +1,8 @@
-package com.FuvSoftware.QandAForum.exception;
+package com.qnaforum.webapp.exception;
 
 
 
-import com.FuvSoftware.QandAForum.payload.ApiResponse;
+import com.qnaforum.webapp.payload.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

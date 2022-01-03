@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum.security;
+package com.qnaforum.webapp.security;
 
 //This class is used to return a 401 unauthorized error to clients that try to access a protected
 // resource without proper authentication. It implements Spring Security’s AuthenticationEntryPoint interface.

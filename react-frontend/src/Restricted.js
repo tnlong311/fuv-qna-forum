@@ -11,11 +11,11 @@ const Restricted = () => {
   const fetchRestricted = () => {
     /*axios.defaults.headers.common['X-CSRF-TOKEN'] = token*/
 
-    axios.get("http://localhost:8080/user", {
-      /*headers: {
-        'X-XSRF-TOKEN': token},*/
-      /*withCredentials: true*/
-      })
+    axios.get("http://localhost:8080/restricted", /*{
+      headers: {
+        'X-XSRF-TOKEN': token},
+      withCredentials: true
+      }*/)
         .then(res => {
       console.log(res.data)
     })

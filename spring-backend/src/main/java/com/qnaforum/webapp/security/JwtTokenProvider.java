@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum.security;
+package com.qnaforum.webapp.security;
 
 
 import io.jsonwebtoken.Claims;

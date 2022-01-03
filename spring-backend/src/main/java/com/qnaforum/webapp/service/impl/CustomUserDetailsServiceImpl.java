@@ -1,9 +1,9 @@
-package com.FuvSoftware.QandAForum.service.impl;
+package com.qnaforum.webapp.service.impl;
 
-import com.FuvSoftware.QandAForum.model.user.User;
-import com.FuvSoftware.QandAForum.repository.UserRepository;
-import com.FuvSoftware.QandAForum.security.UserPrincipal;
-import com.FuvSoftware.QandAForum.service.CustomUserDetailsService;
+import com.qnaforum.webapp.model.user.User;
+import com.qnaforum.webapp.repository.UserRepository;
+import com.qnaforum.webapp.security.UserPrincipal;
+import com.qnaforum.webapp.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

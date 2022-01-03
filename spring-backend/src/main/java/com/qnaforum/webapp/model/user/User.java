@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum.model.user;
+package com.qnaforum.webapp.model.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

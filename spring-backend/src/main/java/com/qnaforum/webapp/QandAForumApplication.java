@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum;
+package com.qnaforum.webapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

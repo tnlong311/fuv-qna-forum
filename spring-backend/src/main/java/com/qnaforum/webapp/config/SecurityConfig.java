@@ -1,9 +1,9 @@
-package com.FuvSoftware.QandAForum.config;
+package com.qnaforum.webapp.config;
 
-import com.FuvSoftware.QandAForum.repository.UserRepository;
-import com.FuvSoftware.QandAForum.security.JwtAuthenticationEntryPoint;
-import com.FuvSoftware.QandAForum.security.JwtAuthenticationFilter;
-import com.FuvSoftware.QandAForum.service.impl.CustomUserDetailsServiceImpl;
+import com.qnaforum.webapp.repository.UserRepository;
+import com.qnaforum.webapp.security.JwtAuthenticationEntryPoint;
+import com.qnaforum.webapp.security.JwtAuthenticationFilter;
+import com.qnaforum.webapp.service.impl.CustomUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

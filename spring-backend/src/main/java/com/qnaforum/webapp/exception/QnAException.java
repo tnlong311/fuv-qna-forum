@@ -1,4 +1,4 @@
-package com.FuvSoftware.QandAForum.exception;
+package com.qnaforum.webapp.exception;
 
 import org.springframework.http.HttpStatus;
 
