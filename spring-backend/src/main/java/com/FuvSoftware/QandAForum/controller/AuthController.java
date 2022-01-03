@@ -29,7 +29,8 @@ import java.net.URI;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
+    @Autowi
+    red
     private AuthenticationManager authenticationManager;
 
     @Autowired
