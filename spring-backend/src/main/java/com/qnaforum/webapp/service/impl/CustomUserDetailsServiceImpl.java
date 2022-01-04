@@ -4,6 +4,7 @@ import com.qnaforum.webapp.model.user.User;
 import com.qnaforum.webapp.repository.UserRepository;
 import com.qnaforum.webapp.security.UserPrincipal;
 import com.qnaforum.webapp.service.CustomUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
+/*@Slf4j *//* for logging*/
 public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
     @Autowired
     private UserRepository userRepository;
