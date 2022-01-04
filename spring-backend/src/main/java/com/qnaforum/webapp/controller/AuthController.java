@@ -1,7 +1,7 @@
 package com.qnaforum.webapp.controller;
 
 import com.qnaforum.webapp.exception.QnAException;
-import com.qnaforum.webapp.model.user.User;
+import com.qnaforum.webapp.model.User;
 import com.qnaforum.webapp.payload.ApiResponse;
 import com.qnaforum.webapp.payload.JwtAuthenticationResponse;
 import com.qnaforum.webapp.payload.LoginRequest;

@@ -1,31 +1,27 @@
-package com.qnaforum.webapp.model.user;
+package com.qnaforum.webapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" })})
+@Table(name = "USER", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" })})
 public class User {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "Uid") //Change from id -> Uid
     private Long id;
 
     @NotBlank
@@ -52,5 +48,9 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    @JsonIgnore //Should add this annotation?
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
 
 }

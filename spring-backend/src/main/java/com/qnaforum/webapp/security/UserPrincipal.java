@@ -1,7 +1,7 @@
 package com.qnaforum.webapp.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.qnaforum.webapp.model.user.User;
+import com.qnaforum.webapp.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
