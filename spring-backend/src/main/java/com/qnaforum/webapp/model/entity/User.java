@@ -1,7 +1,8 @@
-package com.qnaforum.webapp.model;
+package com.qnaforum.webapp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.qnaforum.webapp.model.entity.Post;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
@@ -15,7 +16,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "USER", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" })})
+@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" })})
 public class User {
     private static final long serialVersionUID = 1L;
 
@@ -25,23 +26,26 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Column(name = "username")
+    @Column(name = "Username")
     @Size(max = 40)
     private String username;
 
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(max = 100)
-    @Column(name = "password")
+    @Column(name = "Password")
     private String password;
 
     @NotBlank
     @NaturalId
     @Size(max = 40)
-    @Column(name = "email")
+    @Column(name = "Email")
     @Email
     private String email;
 
+    @JsonIgnore //Should add this annotation?
+    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -49,8 +53,5 @@ public class User {
         this.password = password;
     }
 
-    @JsonIgnore //Should add this annotation?
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
 
 }

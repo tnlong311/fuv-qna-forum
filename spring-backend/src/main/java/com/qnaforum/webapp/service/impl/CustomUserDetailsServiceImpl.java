@@ -1,6 +1,6 @@
 package com.qnaforum.webapp.service.impl;
 
-import com.qnaforum.webapp.model.User;
+import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.repository.UserRepository;
 import com.qnaforum.webapp.security.UserPrincipal;
 import com.qnaforum.webapp.service.CustomUserDetailsService;

@@ -2,7 +2,7 @@ package com.qnaforum.webapp.repository;
 
 
 import com.qnaforum.webapp.exception.ResourceNotFoundException;
-import com.qnaforum.webapp.model.User;
+import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.security.UserPrincipal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
