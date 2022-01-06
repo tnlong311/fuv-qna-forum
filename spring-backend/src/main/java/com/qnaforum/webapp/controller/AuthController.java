@@ -1,7 +1,7 @@
 package com.qnaforum.webapp.controller;
 
-import com.qnaforum.webapp.exception.QnAException;
-import com.qnaforum.webapp.model.user.User;
+import com.qnaforum.webapp.exception.AppException;
+import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.payload.ApiResponse;
 import com.qnaforum.webapp.payload.JwtAuthenticationResponse;
 import com.qnaforum.webapp.payload.LoginRequest;
@@ -55,16 +55,16 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
-            throw new QnAException(HttpStatus.BAD_REQUEST, "Username is already taken");
+            throw new AppException("Username is already taken", HttpStatus.BAD_REQUEST);
         }
 
         if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
-            throw new QnAException(HttpStatus.BAD_REQUEST, "Email is already taken");
+            throw new AppException("Email is already taken", HttpStatus.BAD_REQUEST);
         }
 
-        String username = signUpRequest.getUsername().toLowerCase();
+        String username = signUpRequest.getUsername().toLowerCase(); //Should it be LowerCase()
 
-        String email = signUpRequest.getEmail().toLowerCase();
+        String email = signUpRequest.getEmail().toLowerCase(); //Should it be LowerCase()
 
         String password = passwordEncoder.encode(signUpRequest.getPassword());
 

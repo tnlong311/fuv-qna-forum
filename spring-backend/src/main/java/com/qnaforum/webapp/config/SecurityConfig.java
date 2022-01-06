@@ -80,38 +80,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/api/**", "/welcome").permitAll()
             .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/users/checkUsernameAvailability", "/api/users/checkEmailAvailability").permitAll()
             .anyRequest().authenticated();
 
-        /*http
-            .cors().configurationSource(request -> {
-                var cors = new CorsConfiguration();
-                cors.setAllowedOrigins(List.of("*"));
-                cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
-                cors.setAllowedHeaders(List.of("*"));
-                *//*cors.setAllowedHeaders(List.of("Origin", "Content-Type", "X-Auth-Token"));*//*
-                cors.setAllowedOriginPatterns(List.of("*"));
-                return cors;
-            })
-            .and()
-            .antMatcher("/**").authorizeRequests()
-            .antMatchers("/", "/welcome", "/not-restricted", "/auth/**", "/oauth2/**",
-                "/webjars/**", "/error").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .csrf().disable()
-            .exceptionHandling()
-            .authenticationEntryPoint(unauthorizedHandler)
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .oauth2Login()
-                .defaultSuccessUrl("http://localhost:3000/welcome");*/
-
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-
 
     }
 
