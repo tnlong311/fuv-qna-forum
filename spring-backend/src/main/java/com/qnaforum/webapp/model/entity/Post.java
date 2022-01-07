@@ -36,11 +36,11 @@ public class Post {
     private LocalDateTime createdDate = LocalDateTime.now();
 
 
-    @Column(name = "Like")
-    private int like; //int or Long?
+//    @Column(name = "Like")
+//    private int like; //int or Long?
 
     @CreatedBy
-    @Column(name = "Created_by", length = 50, updatable = false)
+    @Column(name = "CreateBy", length = 50, updatable = false)
     private String createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY) //LAZY or  EAGER?

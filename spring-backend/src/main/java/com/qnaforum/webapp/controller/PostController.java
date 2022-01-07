@@ -3,7 +3,7 @@ package com.qnaforum.webapp.controller;
 import com.qnaforum.webapp.exception.AppException;
 import com.qnaforum.webapp.model.dto.PostDto;
 import com.qnaforum.webapp.model.entity.Post;
-import com.qnaforum.webapp.service.CustomUserDetailsService;
+import com.qnaforum.webapp.security.UserPrincipal;
 import com.qnaforum.webapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +27,6 @@ public class PostController {
         return new ResponseEntity<String>("It's okay", HttpStatus.OK);
     }
 
-
     @GetMapping(value = "/posts")
     public ResponseEntity<List<PostDto>> getPostList(Pageable pageable) {
         Page<Post> posts = postService.findAllByOrderByCreatedDateDescPageable(pageable);
@@ -35,17 +34,16 @@ public class PostController {
         return new ResponseEntity<>(postDto.getContent(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/posts")
+    @PostMapping(value = "/posts/{id}")
     public ResponseEntity<PostDto> addPost(@RequestBody PostDto postDto,
-                                                @CurrentUser CustomUserDetailsService customUserDetails) {
+                                                @CurrentUser UserPrincipal UserPrincipal) {
         if (postDto.getId() != null) {
             throw new AppException("A new post cannot already have an ID", HttpStatus.CONFLICT);
         } else {
-            PostDto returnPost = postService.addPost(postDto, customUserDetails);
+            PostDto returnPost = postService.addPost(postDto, UserPrincipal);
             return new ResponseEntity<PostDto>(returnPost, HttpStatus.CREATED);
         }
     }
-
 
 //    @GetMapping(value = "/posts/{id}")
 

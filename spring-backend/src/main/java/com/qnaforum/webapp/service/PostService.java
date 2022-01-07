@@ -9,13 +9,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface PostService {
 
+//    ApiResponse deletePost(Long id, UserPrincipal currentUser);
 
-
-    ApiResponse deletePost(Long id, UserPrincipal currentUser);
-
-    public PostDto addPost(PostDto postDto, CustomUserDetailsService customUserDetails);
-
-    Post getPost(Long id);
+    public PostDto addPost(PostDto postDto, UserPrincipal userPrincipal);
 
     Page<Post> findAllByOrderByCreatedDateDescPageable(Pageable pageable);
 }

@@ -44,7 +44,7 @@ public class User {
     private String email;
 
     @JsonIgnore //Should add this annotation?
-    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
 
     public User(String username, String email, String password) {
@@ -54,4 +54,6 @@ public class User {
     }
 
 
+    public User(Long id) {
+    }
 }
