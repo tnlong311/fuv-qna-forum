@@ -19,7 +19,7 @@ import java.util.List;
 public class PostController {
 
     @Autowired
-    private PostServiceImpl postService;
+    private PostService postService;
 
     @GetMapping(value = "/test")
     public ResponseEntity<String> Test(Pageable pageable) {

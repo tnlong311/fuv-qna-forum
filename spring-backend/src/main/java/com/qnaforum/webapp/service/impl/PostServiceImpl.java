@@ -17,10 +17,12 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@AllArgsConstructor
 public class PostServiceImpl implements PostService {
-    private final PostMapper postMapper;
-    private final PostRepository postRepository;
+    @Autowired
+    private PostMapper postMapper;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @Override
     public Page<Post> findAllByOrderByCreatedDateDescPageable(Pageable pageable) {

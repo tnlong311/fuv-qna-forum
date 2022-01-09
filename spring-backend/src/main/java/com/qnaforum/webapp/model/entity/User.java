@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qnaforum.webapp.model.entity.Post;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Getter
 @NoArgsConstructor
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" })})
 public class User {
