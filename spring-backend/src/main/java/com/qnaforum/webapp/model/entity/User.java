@@ -14,7 +14,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "Username" })})
