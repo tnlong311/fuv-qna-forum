@@ -7,28 +7,28 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class PostDto {
+public class PostRequest {
 
-    private Long id;
+    private Long Pid;
     private String title;
     private String content;
     private Long Uid; //User or Id or Uid
-    private String username;
+    /*private String username;*/
     private LocalDateTime createdDate;
-    private String createdBy;
+    /*private String createdBy;*/
 
 
-    public PostDto() {
+    public PostRequest() {
     }
 
-    public PostDto(Post post) {
-        this.id = post.getId();
+    public PostRequest(Post post) {
+        this.Pid = post.getPid();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.Uid = post.getUser().getId();
-        this.username = post.getUser().getUsername();
+        this.Uid = post.getUser().getUid();
+        /*this.username = post.getUser().getUsername();*/
         this.createdDate = post.getCreatedDate();
-        this.createdBy = post.getCreatedBy();
+        /*this.createdBy = post.getCreatedBy();*/
     }
 
 }

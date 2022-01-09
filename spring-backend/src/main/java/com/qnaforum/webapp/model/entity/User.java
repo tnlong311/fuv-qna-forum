@@ -23,7 +23,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Uid") //Change from id -> Uid
-    private Long id;
+    private Long Uid;
 
     @NotBlank
     @Column(name = "Username")

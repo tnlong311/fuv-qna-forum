@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 
@@ -23,11 +24,13 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Pid")
-    private Long id;
+    private Long Pid;
 
+    @NotEmpty(message = "Title must not be empty")
     @Column(name = "Title")
     private String title;
 
+    @NotEmpty(message = "Content must not be empty")
     @Column(name = "Content")
     private String content;
 
@@ -39,12 +42,13 @@ public class Post {
     @Column(name = "Like")
     private int like; //int or Long?
 
-    @CreatedBy
+    /*@CreatedBy
     @Column(name = "Created_by", length = 50, updatable = false)
-    private String createdBy;
+    private String createdBy;*/
 
     @ManyToOne(fetch = FetchType.LAZY) //LAZY or  EAGER?
-    @JoinColumn(name = "Uid", nullable = false)
+    @NotEmpty
+    @JoinColumn(name = "Uid", referencedColumnName = "Uid")
     private User user;
 
 

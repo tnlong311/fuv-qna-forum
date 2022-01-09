@@ -1,13 +1,14 @@
 package com.qnaforum.webapp.service.impl;
 
-import com.qnaforum.webapp.model.dto.PostDto;
+import com.qnaforum.webapp.mapper.PostMapper;
+import com.qnaforum.webapp.model.dto.PostRequest;
 import com.qnaforum.webapp.model.entity.Post;
 import com.qnaforum.webapp.payload.ApiResponse;
 import com.qnaforum.webapp.repository.PostRepository;
 
 import com.qnaforum.webapp.security.UserPrincipal;
-import com.qnaforum.webapp.service.CustomUserDetailsService;
 import com.qnaforum.webapp.service.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
@@ -16,15 +17,14 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+@AllArgsConstructor
 public class PostServiceImpl implements PostService {
-
-    @Autowired
-    private PostRepository PostRepository;
-
+    private final PostMapper postMapper;
+    private final PostRepository postRepository;
 
     @Override
     public Page<Post> findAllByOrderByCreatedDateDescPageable(Pageable pageable) {
-        return PostRepository.findAllByOrderByCreatedDateDesc(pageable);
+        return postRepository.findAllByOrderByCreatedDateDesc(pageable);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto addPost(PostDto postDto, CustomUserDetailsService customUserDetails) {
-        return null;
+    public void addPost(PostRequest postRequest) {
+        postRepository.save(postMapper.map(postRequest));
     }
 
     @Override
