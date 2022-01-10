@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "post", uniqueConstraints = { @UniqueConstraint(columnNames = { "Pid" })})
+@Table(name = "post", uniqueConstraints = { @UniqueConstraint(columnNames = { "pid" })})
 public class Post {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Pid")
-    private Long Pid;
+    @Column(name = "pid")
+    private Long pid;
 
     @NotEmpty(message = "Title must not be empty")
     @Column(name = "Title")

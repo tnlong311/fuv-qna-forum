@@ -14,14 +14,17 @@ import java.time.LocalDateTime;
 public class CommentDto {
   private Long Cid;
   private String content;
-  /*private LocalDateTime createdDate;*/
+  private LocalDateTime createdDate;
   private int likes;
   private Long Uid;
-  private Long Pid;
+  private Long pid;
 
   public CommentDto(Comment comment) {
     this.Cid = comment.getCid();
     this.content = comment.getContent();
     this.likes = comment.getLikes();
+    this.createdDate = comment.getCreatedDate();
+    this.Uid = comment.getUser().getUid();
+    this.pid = comment.getPost().getPid();
   }
 }

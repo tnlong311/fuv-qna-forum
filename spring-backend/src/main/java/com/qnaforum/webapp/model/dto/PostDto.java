@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PostDto {
 
-    private Long Pid;
+    private Long pid;
     private String title;
     private String content;
     private Long Uid;
@@ -23,7 +23,7 @@ public class PostDto {
     }
 
     public PostDto(Post post) {
-        this.Pid = post.getPid();
+        this.pid = post.getPid();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.Uid = post.getUser().getUid();

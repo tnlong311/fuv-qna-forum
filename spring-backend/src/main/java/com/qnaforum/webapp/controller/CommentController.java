@@ -25,16 +25,16 @@ public class CommentController {
     return new ResponseEntity<CommentDto>(HttpStatus.CREATED);
   }
 
-  @GetMapping("/{Pid}")
-  public ResponseEntity<CommentDto> getComment(@PathVariable Long Pid) {
-    Comment comment = commentService.findById(Pid)
+  /*@GetMapping("/{pid}")
+  public ResponseEntity<CommentDto> getComment(@PathVariable Long pid) {
+    Comment comment = commentService.findByPid(pid)
         .orElseThrow(() -> new AppException("Comment does not exist", HttpStatus.NOT_FOUND));
     return new ResponseEntity<>(new CommentDto(comment), HttpStatus.OK);
-  }
+  }*/
 
-  @GetMapping("/all/{Pid}")
-  public ResponseEntity<List<CommentDto>> getCommentList(Pageable pageable) {
-    Page<Comment> commentList = commentService.findAllByOrderByCreatedDateDescPageable(pageable);
+  @GetMapping("/all/{pid}")
+  public ResponseEntity<List<CommentDto>> getCommentList(@PathVariable Long pid, Pageable pageable) {
+    Page<Comment> commentList = commentService.findAllByPid(pid, pageable);
     Page<CommentDto> commentDto = commentList.map(comment -> new CommentDto((comment)));
     return new ResponseEntity<>(commentDto.getContent(), HttpStatus.OK);
   }

@@ -19,9 +19,9 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/{Pid}")
-    public ResponseEntity<PostDto> getPost(@PathVariable Long Pid) {
-        Post post = postService.findById(Pid)
+    @GetMapping("/{pid}")
+    public ResponseEntity<PostDto> getPost(@PathVariable Long pid) {
+        Post post = postService.findById(pid)
             .orElseThrow(() -> new AppException("Post does not exist", HttpStatus.NOT_FOUND));
         return new ResponseEntity<>(new PostDto(post), HttpStatus.OK);
     }

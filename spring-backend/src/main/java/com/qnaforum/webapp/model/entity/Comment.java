@@ -40,7 +40,7 @@ public class Comment {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @NotEmpty
-  @JoinColumn(name = "Pid", referencedColumnName = "Pid")
+  @JoinColumn(name = "pid", referencedColumnName = "pid")
   private Post post;
 
   public Comment(String content, LocalDateTime createdDate, User user, Post post) {

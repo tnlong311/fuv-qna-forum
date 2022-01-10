@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-  Page<Comment> findAllByOrderByCreatedDateDesc(Pageable pageable);
+  Page<Comment> findByPost_PidOrderByCreatedDateDesc(Long Pid, Pageable pageable);
 
-  Optional<Comment> findById(Long id);
+  /*Optional<Comment> findByPost_Pid(Long Pid);*/
 }

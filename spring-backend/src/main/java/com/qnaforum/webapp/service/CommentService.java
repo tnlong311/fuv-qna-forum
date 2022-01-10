@@ -26,13 +26,13 @@ public class CommentService {
   @Autowired
   private CustomUserDetailsServiceImpl userDetailsService;
 
-  public Page<Comment> findAllByOrderByCreatedDateDescPageable(Pageable pageable) {
-    return commentRepository.findAllByOrderByCreatedDateDesc(pageable);
+  public Page<Comment> findAllByPid(Long Pid, Pageable pageable) {
+    return commentRepository.findByPost_PidOrderByCreatedDateDesc(Pid, pageable);
   }
 
-  public Optional<Comment> findById(Long id) {
-    return commentRepository.findById(id);
-  }
+  /*public Optional<Comment> findByPid(Long Pid) {
+    return commentRepository.findByPost_Pid(Pid);
+  }*/
 
   public void addComment(CommentDto commentDto) {
     String content = commentDto.getContent();
