@@ -10,28 +10,24 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class PostRequest {
+public class PostDto {
 
     private Long Pid;
     private String title;
     private String content;
-    private Long Uid; //User or Id or Uid
-    /*private String username;*/
+    private Long Uid;
     private LocalDateTime createdDate;
-    /*private String createdBy;*/
 
 
-    public PostRequest() {
+    public PostDto() {
     }
 
-    public PostRequest(Post post) {
+    public PostDto(Post post) {
         this.Pid = post.getPid();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.Uid = post.getUser().getUid();
-        /*this.username = post.getUser().getUsername();*/
         this.createdDate = post.getCreatedDate();
-        /*this.createdBy = post.getCreatedBy();*/
     }
 
 }
