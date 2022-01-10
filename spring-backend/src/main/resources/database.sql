@@ -13,8 +13,9 @@ CREATE TABLE post (
                       DateCreated	DateTime	NOT NULL,
                       Title 		VarChar(100)	NOT NULL,
                       Content		VarChar(2000)	NOT NULL,
-    -- ThreadNum	Int		Default 0,
-                      CreatedBy Char(100)		NOT NULL,
+                      Likes      Int,        /*DEFAULT 0,*/
+                      -- ThreadNum	Int		Default 0,
+                      --CreatedBy Char(100)		NOT NULL,
                       CONSTRAINT	POST_PK		PRIMARY KEY(Pid),
                       CONSTRAINT	POST_FK 	FOREIGN KEY(Uid) REFERENCES user(Uid)
 );

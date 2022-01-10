@@ -1,11 +1,12 @@
 package com.qnaforum.webapp.service.impl;
 
-import com.qnaforum.webapp.mapper.PostMapper;
 import com.qnaforum.webapp.model.dto.PostRequest;
 import com.qnaforum.webapp.model.entity.Post;
+import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.payload.ApiResponse;
 import com.qnaforum.webapp.repository.PostRepository;
 
+import com.qnaforum.webapp.repository.UserRepository;
 import com.qnaforum.webapp.security.UserPrincipal;
 import com.qnaforum.webapp.service.PostService;
 import lombok.AllArgsConstructor;
@@ -13,16 +14,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
-    private PostMapper postMapper;
+    private PostRepository postRepository;
 
     @Autowired
-    private PostRepository postRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomUserDetailsServiceImpl userDetailsService;
 
     @Override
     public Page<Post> findAllByOrderByCreatedDateDescPageable(Pageable pageable) {
@@ -36,7 +44,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void addPost(PostRequest postRequest) {
-        postRepository.save(postMapper.map(postRequest));
+        String title = postRequest.getTitle();
+        String content = postRequest.getContent();
+        int likes = 0;
+        LocalDateTime createdDate = LocalDateTime.now();
+        User user = userDetailsService.getCurrentUserByUsername();
+
+        Post post = new Post(title, content, likes, createdDate, user);
+        postRepository.save(post);
     }
 
     @Override

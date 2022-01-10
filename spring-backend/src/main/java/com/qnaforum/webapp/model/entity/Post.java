@@ -31,11 +31,11 @@ public class Post {
     private String content;
 
     @CreatedDate
-    @Column(name = "DateCreated")
-    private LocalDateTime createdDate = LocalDateTime.now();
+    @Column(name = "datecreated", columnDefinition = "TIMESTAMP")
+    private LocalDateTime createdDate;
 
 
-    @Column(name = "Like")
+    @Column(name = "Likes")
     private int like; //int or Long?
 
     /*@CreatedBy
@@ -48,4 +48,11 @@ public class Post {
     private User user;
 
 
+    public Post(String title, String content, int like, LocalDateTime createdDate, User user) {
+        this.title = title;
+        this.content = content;
+        this.like = like;
+        this.createdDate = createdDate;
+        this.user = user;
+    }
 }
