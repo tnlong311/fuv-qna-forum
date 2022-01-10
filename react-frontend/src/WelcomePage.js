@@ -29,14 +29,17 @@ const WelcomePage = () => {
       </Row>
       <Row >
         <div >
-        <Link to="/restricted">
-          <button className="mb-3 logSignButton">Login</button>{' '}
-        </Link>
+          <a className="mb-3 logSignButton"
+             href="http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/welcome"
+              /*href="http://localhost:3000/oauth2/authorization/google"*/>
+            Login</a>
         </div>
       </Row>
       <Row >
         <div >
-        <Button className="logSignButton">Sign up</Button>{' '}
+          <a className="mt-4 logSignButton"
+             href="http://localhost:3000/restricted">
+            Sign up</a>
         </div>
       </Row>
       </div>
