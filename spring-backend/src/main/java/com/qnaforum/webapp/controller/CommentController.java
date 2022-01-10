@@ -25,12 +25,6 @@ public class CommentController {
     return new ResponseEntity<CommentDto>(HttpStatus.CREATED);
   }
 
-  /*@GetMapping("/{pid}")
-  public ResponseEntity<CommentDto> getComment(@PathVariable Long pid) {
-    Comment comment = commentService.findByPid(pid)
-        .orElseThrow(() -> new AppException("Comment does not exist", HttpStatus.NOT_FOUND));
-    return new ResponseEntity<>(new CommentDto(comment), HttpStatus.OK);
-  }*/
 
   @GetMapping("/all/{pid}")
   public ResponseEntity<List<CommentDto>> getCommentList(@PathVariable Long pid, Pageable pageable) {
