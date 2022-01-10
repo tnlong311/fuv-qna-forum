@@ -19,3 +19,16 @@ CREATE TABLE post (
                       CONSTRAINT	POST_PK		PRIMARY KEY(Pid),
                       CONSTRAINT	POST_FK 	FOREIGN KEY(Uid) REFERENCES user(Uid)
 );
+
+CREATE TABLE comment (
+                         Cid		Int		NOT NULL  auto_increment,
+                         Pid		Int		NOT NULL,
+                         Uid		Int		NOT NULL,
+                         DateCreated	DateTime	NOT NULL,
+                         Content		VarChar(10000)	NOT NULL,
+                         Likes		Int		Default 0,
+                         CONSTRAINT	THREAD_PK	PRIMARY KEY(Cid),
+                         CONSTRAINT	THREADUSER_FK 	FOREIGN KEY(Uid) REFERENCES user(Uid),
+                         CONSTRAINT	THREADPOST_FK 	FOREIGN KEY(Pid) REFERENCES post(Pid)
+                             ON DELETE CASCADE
+);

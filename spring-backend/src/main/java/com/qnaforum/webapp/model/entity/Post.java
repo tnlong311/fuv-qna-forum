@@ -34,7 +34,6 @@ public class Post {
     @Column(name = "datecreated", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdDate;
 
-
     @Column(name = "Likes")
     private int likes; //int or Long?
 
