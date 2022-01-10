@@ -1,7 +1,7 @@
 package com.qnaforum.webapp.controller;
 
 import com.qnaforum.webapp.exception.AppException;
-import com.qnaforum.webapp.model.dto.PostDto;
+import com.qnaforum.webapp.model.dto.PostRequest;
 import com.qnaforum.webapp.model.entity.Post;
 import com.qnaforum.webapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +16,27 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
-
     @Autowired
     private PostService postService;
 
-    @GetMapping(value = "{Pid}")
-    public ResponseEntity<PostDto> getPost(@PathVariable Long Pid) {
-        Post post = postService.findForId(Pid).orElseThrow(() -> new AppException("Post does not exist", HttpStatus.NOT_FOUND));
-        return new ResponseEntity<>(new PostDto(post), HttpStatus.OK);
+    @GetMapping("/{Pid}")
+    public ResponseEntity<PostRequest> getPost(@PathVariable Long Pid) {
+        Post post = postService.findForId(Pid)
+            .orElseThrow(() -> new AppException("Post does not exist", HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(new PostRequest(post), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<PostDto>> getPostList(Pageable pageable) {
+    @GetMapping("/all")
+    public ResponseEntity<List<PostRequest>> getPostList(Pageable pageable) {
         Page<Post> posts = postService.findAllByOrderByCreatedDateDescPageable(pageable);
-        Page<PostDto> postDto = posts.map(post -> new PostDto((post)));
-        return new ResponseEntity<>(postDto.getContent(), HttpStatus.OK);
+        Page<PostRequest> postRequest = posts.map(post -> new PostRequest((post)));
+        return new ResponseEntity<>(postRequest.getContent(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> addPost(@RequestBody PostDto postRequest) {
+    public ResponseEntity<PostRequest> addPost(@RequestBody PostRequest postRequest) {
         postService.addPost(postRequest);
-        return new ResponseEntity<PostDto>(HttpStatus.CREATED);
+        return new ResponseEntity<PostRequest>(HttpStatus.CREATED);
     }
 
 }

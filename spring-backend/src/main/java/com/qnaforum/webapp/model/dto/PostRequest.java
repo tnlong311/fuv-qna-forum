@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class PostDto {
+public class PostRequest {
 
     private Long Pid;
     private String title;
@@ -19,10 +19,10 @@ public class PostDto {
     private LocalDateTime createdDate;
 
 
-    public PostDto() {
+    public PostRequest() {
     }
 
-    public PostDto(Post post) {
+    public PostRequest(Post post) {
         this.Pid = post.getPid();
         this.title = post.getTitle();
         this.content = post.getContent();
