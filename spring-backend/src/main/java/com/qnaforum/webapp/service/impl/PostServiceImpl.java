@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -34,9 +35,8 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllByOrderByCreatedDateDesc(pageable);
     }
 
-    @Override
-    public ApiResponse deletePost(Long id, UserPrincipal currentUser) {
-        return null;
+    public Optional<Post> findForId(Long id) {
+        return postRepository.findById(id);
     }
 
     @Override
@@ -48,10 +48,5 @@ public class PostServiceImpl implements PostService {
 
         Post post = new Post(title, content, createdDate, user);
         postRepository.save(post);
-    }
-
-    @Override
-    public Post getPost(Long id) {
-        return null;
     }
 }
