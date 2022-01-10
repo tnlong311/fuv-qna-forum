@@ -28,26 +28,19 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<PostRequest> addPost(@RequestBody PostRequest postRequest) {
-        /*if (postRequest.getPid() != null) {
-            throw new AppException("A new post cannot already have an ID", HttpStatus.CONFLICT);
-        } else {*/
         postService.addPost(postRequest);
         return new ResponseEntity<PostRequest>(HttpStatus.CREATED);
-        /*}*/
     }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<PostRequest>> getPostList(Pageable pageable) {
         Page<Post> posts = postService.findAllByOrderByCreatedDateDescPageable(pageable);
-        Page<PostRequest> postDto = posts.map(post -> new PostRequest((post)));
-        return new ResponseEntity<>(postDto.getContent(), HttpStatus.OK);
+        Page<PostRequest> postRequest = posts.map(post -> new PostRequest((post)));
+        return new ResponseEntity<>(postRequest.getContent(), HttpStatus.OK);
     }
 
+//    @GetMapping(value = "/{Pid}")
 
-//    @GetMapping(value = "/posts/{id}")
-
-//    @PostMapping(value = "/posts")
-
-//    @DeleteMapping(value = "/posts/{id}")
+//    @DeleteMapping(value = "/delete/{Pid}")
 
 }

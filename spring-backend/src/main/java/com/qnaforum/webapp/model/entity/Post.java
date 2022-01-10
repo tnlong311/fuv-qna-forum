@@ -36,7 +36,7 @@ public class Post {
 
 
     @Column(name = "Likes")
-    private int like; //int or Long?
+    private int likes; //int or Long?
 
     /*@CreatedBy
     @Column(name = "Created_by", length = 50, updatable = false)
@@ -48,10 +48,9 @@ public class Post {
     private User user;
 
 
-    public Post(String title, String content, int like, LocalDateTime createdDate, User user) {
+    public Post(String title, String content, LocalDateTime createdDate, User user) {
         this.title = title;
         this.content = content;
-        this.like = like;
         this.createdDate = createdDate;
         this.user = user;
     }

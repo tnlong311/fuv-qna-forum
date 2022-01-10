@@ -46,11 +46,10 @@ public class PostServiceImpl implements PostService {
     public void addPost(PostRequest postRequest) {
         String title = postRequest.getTitle();
         String content = postRequest.getContent();
-        int likes = 0;
         LocalDateTime createdDate = LocalDateTime.now();
         User user = userDetailsService.getCurrentUserByUsername();
 
-        Post post = new Post(title, content, likes, createdDate, user);
+        Post post = new Post(title, content, createdDate, user);
         postRepository.save(post);
     }
 
