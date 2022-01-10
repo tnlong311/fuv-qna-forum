@@ -3,8 +3,7 @@ package com.qnaforum.webapp.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.qnaforum.webapp.model.entity.Post;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -15,15 +14,16 @@ import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" })})
+@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "Username" })})
 public class User {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Uid") //Change from id -> Uid
-    private Long id;
+    private Long Uid;
 
     @NotBlank
     @Column(name = "Username")
@@ -52,6 +52,5 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
 
 }

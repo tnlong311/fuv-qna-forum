@@ -6,6 +6,7 @@ import com.qnaforum.webapp.security.UserPrincipal;
 import com.qnaforum.webapp.service.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,5 +34,16 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomU
         User user = userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException(String.format("User not found with id: %s", id)));
 
         return UserPrincipal.create(user);
+    }
+
+    @Override
+    @Transactional
+    public User getCurrentUserByUsername() {
+        /*org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+            getContext().getAuthentication().getPrincipal();*/
+        com.qnaforum.webapp.security.UserPrincipal principal = (com.qnaforum.webapp.security.UserPrincipal) SecurityContextHolder.
+            getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(principal.getUsername())
+            .orElseThrow(() -> new UsernameNotFoundException("User name not found - " + principal.getUsername()));
     }
 }
