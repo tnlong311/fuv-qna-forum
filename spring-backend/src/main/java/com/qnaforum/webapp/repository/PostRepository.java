@@ -7,17 +7,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    /*Page<Post> findByUserOrderByCreatedDateDesc(User user, Pageable pageable);*/
-
     Page<Post> findAllByOrderByCreatedDateDesc(Pageable pageable);
 
-    /*Page<Post> findByCreatedBy(Long userId, Pageable pageable);*/
-
-    /*Long countByCreatedBy(Long userId);*/
+    Optional<Post> findById(Long id);
 
 
 }

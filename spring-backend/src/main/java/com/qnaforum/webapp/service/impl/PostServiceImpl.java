@@ -1,6 +1,6 @@
 package com.qnaforum.webapp.service.impl;
 
-import com.qnaforum.webapp.model.dto.PostRequest;
+import com.qnaforum.webapp.model.dto.PostDto;
 import com.qnaforum.webapp.model.entity.Post;
 import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.payload.ApiResponse;
@@ -9,12 +9,10 @@ import com.qnaforum.webapp.repository.PostRepository;
 import com.qnaforum.webapp.repository.UserRepository;
 import com.qnaforum.webapp.security.UserPrincipal;
 import com.qnaforum.webapp.service.PostService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,13 +35,12 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllByOrderByCreatedDateDesc(pageable);
     }
 
-    @Override
-    public ApiResponse deletePost(Long id, UserPrincipal currentUser) {
-        return null;
+    public Optional<Post> findForId(Long id) {
+        return postRepository.findById(id);
     }
 
     @Override
-    public void addPost(PostRequest postRequest) {
+    public void addPost(PostDto postRequest) {
         String title = postRequest.getTitle();
         String content = postRequest.getContent();
         LocalDateTime createdDate = LocalDateTime.now();
@@ -51,10 +48,5 @@ public class PostServiceImpl implements PostService {
 
         Post post = new Post(title, content, createdDate, user);
         postRepository.save(post);
-    }
-
-    @Override
-    public Post getPost(Long id) {
-        return null;
     }
 }
