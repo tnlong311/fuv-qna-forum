@@ -8,9 +8,12 @@ import com.qnaforum.webapp.repository.CommentRepository;
 import com.qnaforum.webapp.repository.PostRepository;
 import com.qnaforum.webapp.service.impl.CustomUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -22,6 +25,14 @@ public class CommentService {
 
   @Autowired
   private CustomUserDetailsServiceImpl userDetailsService;
+
+  public Page<Comment> findAllByOrderByCreatedDateDescPageable(Pageable pageable) {
+    return commentRepository.findAllByOrderByCreatedDateDesc(pageable);
+  }
+
+  public Optional<Comment> findById(Long id) {
+    return commentRepository.findById(id);
+  }
 
   public void addComment(CommentDto commentDto) {
     String content = commentDto.getContent();

@@ -21,15 +21,15 @@ public class PostController {
 
     @GetMapping("/{Pid}")
     public ResponseEntity<PostDto> getPost(@PathVariable Long Pid) {
-        Post post = postService.findForId(Pid)
+        Post post = postService.findById(Pid)
             .orElseThrow(() -> new AppException("Post does not exist", HttpStatus.NOT_FOUND));
         return new ResponseEntity<>(new PostDto(post), HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<PostDto>> getPostList(Pageable pageable) {
-        Page<Post> posts = postService.findAllByOrderByCreatedDateDescPageable(pageable);
-        Page<PostDto> postDto = posts.map(post -> new PostDto((post)));
+        Page<Post> postList = postService.findAllByOrderByCreatedDateDescPageable(pageable);
+        Page<PostDto> postDto = postList.map(post -> new PostDto((post)));
         return new ResponseEntity<>(postDto.getContent(), HttpStatus.OK);
     }
 

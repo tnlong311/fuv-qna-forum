@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAllByOrderByCreatedDateDesc(pageable);
     }
 
-    public Optional<Post> findForId(Long id) {
+    public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
     }
 

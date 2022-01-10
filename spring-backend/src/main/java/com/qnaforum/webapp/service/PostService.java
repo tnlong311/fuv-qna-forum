@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface PostService {
 
-    public Optional<Post> findForId(Long id);
+    public Optional<Post> findById(Long id);
 
     public void addPost(PostDto postDto);
 
