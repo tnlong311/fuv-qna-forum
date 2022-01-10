@@ -1,6 +1,6 @@
 package com.qnaforum.webapp.service.impl;
 
-import com.qnaforum.webapp.model.dto.PostRequest;
+import com.qnaforum.webapp.model.dto.PostDto;
 import com.qnaforum.webapp.model.entity.Post;
 import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.repository.PostRepository;
@@ -38,9 +38,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void addPost(PostRequest postRequest) {
-        String title = postRequest.getTitle();
-        String content = postRequest.getContent();
+    public void addPost(PostDto postDto) {
+        String title = postDto.getTitle();
+        String content = postDto.getContent();
         LocalDateTime createdDate = LocalDateTime.now();
         User user = userDetailsService.getCurrentUserByUsername();
 

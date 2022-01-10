@@ -1,6 +1,6 @@
 package com.qnaforum.webapp.controller;
 
-import com.qnaforum.webapp.model.dto.CommentRequest;
+import com.qnaforum.webapp.model.dto.CommentDto;
 import com.qnaforum.webapp.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +14,9 @@ public class CommentController {
   private CommentService commentService;
 
   @PostMapping
-  public ResponseEntity<CommentRequest> addComment(@RequestBody CommentRequest commentRequest) {
-    commentService.addComment(commentRequest);
-    return new ResponseEntity<CommentRequest>(HttpStatus.CREATED);
+  public ResponseEntity<CommentDto> addComment(@RequestBody CommentDto commentDto) {
+    commentService.addComment(commentDto);
+    return new ResponseEntity<CommentDto>(HttpStatus.CREATED);
   }
 
   // @GetMapping("/all/{Pid}")

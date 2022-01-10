@@ -1,7 +1,7 @@
 package com.qnaforum.webapp.controller;
 
 import com.qnaforum.webapp.exception.AppException;
-import com.qnaforum.webapp.model.dto.PostRequest;
+import com.qnaforum.webapp.model.dto.PostDto;
 import com.qnaforum.webapp.model.entity.Post;
 import com.qnaforum.webapp.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,23 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("/{Pid}")
-    public ResponseEntity<PostRequest> getPost(@PathVariable Long Pid) {
+    public ResponseEntity<PostDto> getPost(@PathVariable Long Pid) {
         Post post = postService.findForId(Pid)
             .orElseThrow(() -> new AppException("Post does not exist", HttpStatus.NOT_FOUND));
-        return new ResponseEntity<>(new PostRequest(post), HttpStatus.OK);
+        return new ResponseEntity<>(new PostDto(post), HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<PostRequest>> getPostList(Pageable pageable) {
+    public ResponseEntity<List<PostDto>> getPostList(Pageable pageable) {
         Page<Post> posts = postService.findAllByOrderByCreatedDateDescPageable(pageable);
-        Page<PostRequest> postRequest = posts.map(post -> new PostRequest((post)));
-        return new ResponseEntity<>(postRequest.getContent(), HttpStatus.OK);
+        Page<PostDto> postDto = posts.map(post -> new PostDto((post)));
+        return new ResponseEntity<>(postDto.getContent(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<PostRequest> addPost(@RequestBody PostRequest postRequest) {
-        postService.addPost(postRequest);
-        return new ResponseEntity<PostRequest>(HttpStatus.CREATED);
+    public ResponseEntity<PostDto> addPost(@RequestBody PostDto postDto) {
+        postService.addPost(postDto);
+        return new ResponseEntity<PostDto>(HttpStatus.CREATED);
     }
 
 }

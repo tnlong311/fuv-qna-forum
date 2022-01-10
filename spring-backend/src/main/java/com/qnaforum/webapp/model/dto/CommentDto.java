@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class CommentRequest {
+public class CommentDto {
   /*private Long Cid;*/
   private String content;
   /*private LocalDateTime createdDate;*/
