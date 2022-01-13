@@ -4,6 +4,8 @@ import './App.css';
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import axios from "axios";
+import history from './history';
+
 
 const WelcomePage = () => {
   const fetchWelcomePage = () => {
@@ -15,7 +17,6 @@ const WelcomePage = () => {
   useEffect(() => {
     fetchWelcomePage();
   }, [])
-
   return (
     <div className="App">
       <div className="decor" >
@@ -29,17 +30,16 @@ const WelcomePage = () => {
       </Row>
       <Row >
         <div >
-          <a className="mb-3 logSignButton"
-             href="http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/welcome"
-              /*href="http://localhost:3000/oauth2/authorization/google"*/>
-            Login</a>
+          <Button className="mb-3 logSignButton"
+             href="/login">
+            Login</Button>
         </div>
       </Row>
       <Row >
         <div >
-          <a className="mt-4 logSignButton"
-             href="http://localhost:3000/restricted">
-            Sign up</a>
+          <Button className="mt-4 logSignButton"
+             href="/signup">
+            Sign up</Button>
         </div>
       </Row>
       </div>
