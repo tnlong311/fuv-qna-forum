@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { setUserSession } from './Utils/Common';
+import { getToken, setUserSession } from './Utils/Common';
 import {Image, Button, Row, Form, FormGroup, ControlLabel, FormControl, HelpBlock, InputGroup} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
@@ -40,7 +40,11 @@ function Login(props) {
     axios.post('http://localhost:8080/api/auth/signin',{usernameOrEmail:usernameOrEmail, password:password}, config).then(response => {
       setLoading(false);
       console.log(response.data);
-      setUserSession(response.data.accessToken, usernameOrEmail);
+      console.log(response.data.accessToken)
+      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('user', JSON.stringify(usernameOrEmail));
+      // setUserSession(response.data.accessToken, usernameOrEmail);
+      //console.log(getToken())
       history.push('/dashboard');
       window.location.reload(false);
       // <Link 
