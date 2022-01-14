@@ -8,12 +8,18 @@ import {useEffect} from "react";
 import Cookies from 'js-cookie';
 import history from './history';
 import {Link, Navigate, Route, Router, useHref } from 'react-router-dom';
+import OnePost from './OnePost'
 //import { useRouter } from "next/router";
+
 function Login(props) {
   const [loading, setLoading] = useState(false);
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [post, setPost] = useState('');
+  const [comments, setComments] = useState('');
   //const router = useRouter();
   const params = JSON.stringify({
 
@@ -40,13 +46,13 @@ function Login(props) {
     axios.post('http://localhost:8080/api/auth/signin',{usernameOrEmail:usernameOrEmail, password:password}, config).then(response => {
       setLoading(false);
       console.log(response.data);
-      console.log(response.data.accessToken)
+      console.log(response.data.accessToken);
       localStorage.setItem('token', response.data.accessToken);
       localStorage.setItem('user', JSON.stringify(usernameOrEmail));
       // setUserSession(response.data.accessToken, usernameOrEmail);
       //console.log(getToken())
-      history.push('/dashboard');
-      window.location.reload(false);
+      /*history.push('/dashboard');*/
+      /*window.location.reload(false);*/
       // <Link 
       // to={'/dashboard'}{...props}/>
       //window.open('/dashboard')
@@ -68,6 +74,27 @@ function Login(props) {
   const handlePasswordChange = (password) => {
     setPassword(password.target.value);
   }
+
+
+  const getPost = ({pid}) => {
+    let config = {
+      headers: {'Authorization': `Bearer ${getToken()}`},
+    };
+
+    axios.get('http://localhost:8080/api/posts/5', config)
+        .then((response) => {
+          console.log("Get post successfully");
+          setPost(response.data)
+      })
+
+    axios.get('http://localhost:8080/api/comment/all/5', config)
+        .then((response) => {
+          console.log("Get comment successfully");
+          setComments(response.data)
+      })
+  }
+
+
   return (
     <div>
       Login<br /><br />
@@ -92,6 +119,12 @@ function Login(props) {
           Submit
         </Button>
       </Form>
+
+      <Button onClick={getPost}>Get post by ID</Button>
+      <Button onClick={() => setIsOpen(!isOpen)}>Toggle one post</Button>
+
+      {isOpen ? <OnePost post={post} comments={comments}/> : null}
+
      </div>
   );
 }

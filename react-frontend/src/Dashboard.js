@@ -4,6 +4,7 @@ import history from './history';
 import {Image, Button, Row} from "react-bootstrap";
 import axios from 'axios';
 import { getToken, removeUserSession, getUser, setUserSession } from './Utils/Common';
+
 function Dashboard(props) {
   const user = getUser();
  
@@ -21,16 +22,17 @@ function Dashboard(props) {
  function getContent() {
   var config = {
     headers: {'Authorization': `Bearer ${getToken()}`},
-}; 
-   console.log(localStorage.getItem('token'))
-   axios.get('http://localhost:8080/api/posts/all', config)
-   .then((response) => {
-     console.log(response.data)
-   })
+  };
+
+  console.log(localStorage.getItem('token'))
+  axios.get('http://localhost:8080/api/posts/all', config)
+  .then((response) => {
+   console.log(response.data)
+  })
 
  }
 
-start();
+  start();
 
   return (
     <div>
