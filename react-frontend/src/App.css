@@ -1,6 +1,22 @@
 .App {
-  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
 }
+
+/* font styles for global use */
+.qna-heading-1 {
+  font-size: 48px;
+  font-weight: 600;
+}
+.qna-heading-2 {
+  font-size: 36px;
+  font-weight: 500;
+}
+.qna-heading-3 {
+  font-size: 24px;
+  /* font-weight: 500; */
+}
+
 
 .App-logo {
   height: 40vmin;
