@@ -14,4 +14,6 @@ public interface PostService {
     public void addPost(PostDto postDto);
 
     Page<Post> findAllByOrderByCreatedDateDescPageable(Pageable pageable);
+
+    public void deletePost(Long id);
 }

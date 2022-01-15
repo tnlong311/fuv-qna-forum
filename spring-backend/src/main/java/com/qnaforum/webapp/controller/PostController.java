@@ -39,4 +39,14 @@ public class PostController {
         return new ResponseEntity<PostDto>(HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "/{pid}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long pid) {
+        if (pid == null) {
+            throw new AppException("Post pid cannot null", HttpStatus.NOT_FOUND);
+        } else {
+            postService.deletePost(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
 }

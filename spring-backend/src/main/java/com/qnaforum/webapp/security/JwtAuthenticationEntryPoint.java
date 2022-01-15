@@ -1,8 +1,5 @@
 package com.qnaforum.webapp.security;
 
-//This class is used to return a 401 unauthorized error to clients that try to access a protected
-// resource without proper authentication. It implements Spring Security’s AuthenticationEntryPoint interface.
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
