@@ -14,6 +14,9 @@ import { getToken, removeUserSession, setUserSession } from './Utils/Common';
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
+  window.onload=()=>{
+    
+  }
   var config = {
     headers: {
       "Content-Type": 'application/json',
