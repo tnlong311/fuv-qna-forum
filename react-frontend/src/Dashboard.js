@@ -44,11 +44,11 @@ function Dashboard(props) {
   
  function getContent(callback) {
   
-   console.log(localStorage.getItem('token'))
+   /*console.log(localStorage.getItem('token'))*/
    axios.get('http://localhost:8080/api/posts/all', configapi)
    .then((response) => {
       setPostList(response.data)
-    console.log(response.data)
+   /* console.log(response.data)*/
      return response;
    })
    .then(callback);
@@ -56,7 +56,7 @@ function Dashboard(props) {
 
  function start(){
   getContent(function(posts){
-    console.log(posts)
+    /*console.log(posts)*/
     })
   }
   
@@ -110,13 +110,11 @@ function Dashboard(props) {
         </Col>
       </Row>
 
-      <Button onClick={() => getPost(8)}>Toggle one post</Button>
-
       {isOpen ? <OnePost postProp={post} commentsProp={comments}/> : null}
 
-      <Row className="gx-4 gy-5 mt-3 mx-auto" style={{width:'50%'}}>
+      <Row className="gx-4 gy-5 mt-3 mx-auto w-50">
         {postList.map(post => 
-          <Card className="Postcard text-start" border="0" style={{}}>
+          <Card className="Postcard text-start" border="0" onClick={() => getPost(`${post.pid}`)}>
               <Card.Title>
                 <div className = "username mb-1"> 
                   {post.uid}
