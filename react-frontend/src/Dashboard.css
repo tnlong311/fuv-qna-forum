@@ -57,3 +57,14 @@
     font-weight: 700 !important;
     line-height: 21.09px !important;
 }
+
+.post-mask{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    opacity: 0.4;
+    background-color: black;
+    z-index: 5;
+}
