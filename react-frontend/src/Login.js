@@ -46,13 +46,13 @@ function Login(props) {
     axios.post('http://localhost:8080/api/auth/signin',{usernameOrEmail:usernameOrEmail, password:password}, config).then(response => {
       setLoading(false);
       console.log(response.data);
-      console.log(response.data.accessToken);
-      localStorage.setItem('token', response.data.accessToken);
-      localStorage.setItem('user', JSON.stringify(usernameOrEmail));
+      console.log(response.data.accessToken)
+      window.localStorage.setItem('token', response.data.accessToken);
+      window.localStorage.setItem('user', JSON.stringify(usernameOrEmail));
       // setUserSession(response.data.accessToken, usernameOrEmail);
       //console.log(getToken())
-      /*history.push('/dashboard');*/
-      /*window.location.reload(false);*/
+      history.push('/dashboard');
+      //window.location.reload(false);
       // <Link 
       // to={'/dashboard'}{...props}/>
       //window.open('/dashboard')

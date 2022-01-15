@@ -1,0 +1,59 @@
+.Postcard{
+    background: #F6F6F6;
+    border-radius: 30px;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+.listPost{
+    padding-bottom: 3rem;
+}
+.username{
+    color: #FFAD1D;
+
+}
+.datecre{
+    font-size: 12px !important;
+    font-style: normal !important;
+    font-weight: 100 !important;
+    line-height: 14.06px !important;
+}
+.posttitle{
+    font-size: 18px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 21.09px !important;
+}
+.postcontent{
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 16.41px !important;
+}
+.Nameapp{
+    font-size: 48px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: 65.37px !important;
+    color: #00196E;
+}
+.NewpostButton{
+    width: 10rem!important;
+    background-color: #FFC300!important;
+    border-color: rgba(196,196,196,15%)!important;
+    color: #00196E!important;
+    border-radius:23px!important;
+}
+.modalButton{
+    width: 5rem!important;
+    background-color: #FFC300!important;
+    border-color: rgba(196,196,196,15%)!important;
+    color: #00196E!important;
+    border-radius:23px!important;
+}
+.welcome{
+    color: #EE4A46;
+    font-size: 18px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 21.09px !important;
+}
