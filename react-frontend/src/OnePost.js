@@ -3,7 +3,7 @@ import "./OnePost.css"
 
 function OnePost({post, comments}) {
   const PostView = () => {
-    const postUserName = "Longcool_292"
+    const postUserName = post.userName
     const postDateCreated = post.createdDate
     const postTitle = post.title
     const postContent =  post.content
@@ -22,13 +22,11 @@ function OnePost({post, comments}) {
     )
   }
   const CommentView = () => {
-    const cmtUserName = "Longcool_292"
-
     return (
         comments.map((comment) => (
           <div className="cmt-wrap d-flex flex-column align-items-start">
             <div className="cmt-top">
-              <div className="cmt-name">{cmtUserName}</div>
+              <div className="cmt-name">{comment.userName}</div>
               <div className="cmt-date">{comment.createdDate}</div>
             </div>
             <div className="cmt-middle">
