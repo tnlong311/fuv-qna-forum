@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getToken, setUserSession } from './Utils/Common';
 import {Image, Button, Row, Form, FormGroup, ControlLabel, FormControl, HelpBlock, InputGroup} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
-import {useEffect} from "react";
 import Cookies from 'js-cookie';
 import history from './history';
 import {Link, Navigate, Route, Router, useHref } from 'react-router-dom';
@@ -126,9 +125,9 @@ function Login(props) {
         </Button>
       </Form>
 
-      <Button onClick={() => getPost(5)}>Toggle one post</Button>
+      <Button onClick={() => getPost(8)}>Toggle one post</Button>
 
-      {isOpen ? <OnePost post={post} comments={comments}/> : null}
+      {isOpen ? <OnePost postProp={post} commentsProp={comments}/> : null}
 
      </div>
   );

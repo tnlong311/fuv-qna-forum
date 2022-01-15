@@ -32,5 +32,23 @@
   font-size: 0.9em;
 }
 
+/* new comment box*/
+.new-cmt-wrap {
+  width: auto;
+  margin: 15px 20px 0px 20px;
+}
+.new-cmt-input {
+  width: 100%;
+}
+.new-cmt-text {
+  height: 100px;
+  border-radius: 10px;
+}
+.submit-button{
+  margin: 0px 3px 0px 3px;
+  line-height: 86px;
+  border-radius: 10px;
+  background-color: #003566;
+}
 
 
