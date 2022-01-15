@@ -76,22 +76,28 @@ function Login(props) {
   }
 
 
-  const getPost = ({pid}) => {
+  const getPost = (pid) => {
     let config = {
       headers: {'Authorization': `Bearer ${getToken()}`},
     };
 
-    axios.get('http://localhost:8080/api/posts/5', config)
+    axios.get(`http://localhost:8080/api/comment/all/${pid}`, config)
+        .then((response) => {
+          console.log("Get comment successfully");
+          setComments(response.data);
+        })
+
+    axios.get(`http://localhost:8080/api/posts/${pid}`, config)
         .then((response) => {
           console.log("Get post successfully");
           setPost(response.data)
-      })
 
-    axios.get('http://localhost:8080/api/comment/all/5', config)
-        .then((response) => {
-          console.log("Get comment successfully");
-          setComments(response.data)
-      })
+          setIsOpen(!isOpen)
+        })
+        .catch((err) => {
+          alert("Post does not exist")
+        })
+
   }
 
 
@@ -120,8 +126,7 @@ function Login(props) {
         </Button>
       </Form>
 
-      <Button onClick={getPost}>Get post by ID</Button>
-      <Button onClick={() => setIsOpen(!isOpen)}>Toggle one post</Button>
+      <Button onClick={() => getPost(5)}>Toggle one post</Button>
 
       {isOpen ? <OnePost post={post} comments={comments}/> : null}
 

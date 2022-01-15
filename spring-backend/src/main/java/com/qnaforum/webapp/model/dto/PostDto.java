@@ -16,17 +16,15 @@ public class PostDto {
     private String title;
     private String content;
     private Long Uid;
+    private String userName;
     private LocalDateTime createdDate;
-
-
-    public PostDto() {
-    }
 
     public PostDto(Post post) {
         this.pid = post.getPid();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.Uid = post.getUser().getUid();
+        this.userName = post.getUser().getUsername();
         this.createdDate = post.getCreatedDate();
     }
 
