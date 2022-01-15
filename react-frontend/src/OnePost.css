@@ -1,8 +1,11 @@
 .one-post-wrap {
   background-color: #F6F6F6;
   border-radius: 15px;
+  position: absolute;
+  top: 100px;
 
-  margin: 100px auto 100px auto;
+  /*margin: 300px auto auto auto;*/
+  z-index: 10;
 }
 
 /* post */

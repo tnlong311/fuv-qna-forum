@@ -18,6 +18,7 @@ function Dashboard(props) {
   const [comments, setComments] = useState('');
 
   const [postList, setPostList] = useState([])
+
   const handleTitleChange = (title) => {
     setTitle(title.target.value)
   }
@@ -40,27 +41,36 @@ function Dashboard(props) {
 	}
   var configapi = {
     headers: {'Authorization': `Bearer ${getToken()}`},
-  }; 
+  };
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/posts/all', configapi)
+        .then((response) => {
+          setPostList(response.data)
+          console.log(response.data)
+        })
+  }, [])
+
   
- function getContent(callback) {
+ /*function getContent(callback) {
   
-   console.log(localStorage.getItem('token'))
+   /!*console.log(localStorage.getItem('token'))*!/
    axios.get('http://localhost:8080/api/posts/all', configapi)
    .then((response) => {
       setPostList(response.data)
     console.log(response.data)
      return response;
    })
-   .then(callback);
+   /!*.then(callback);*!/
  }
 
  function start(){
   getContent(function(posts){
-    console.log(posts)
+    /!*console.log(posts)*!/
     })
   }
   
-  start();
+  start();*/
 
   const getPost = (pid) => {
     let config = {
@@ -77,14 +87,14 @@ function Dashboard(props) {
         .then((response) => {
           console.log("Get post successfully");
           setPost(response.data)
-
-          setIsOpen(!isOpen)
         })
         .catch((err) => {
           alert("Post does not exist")
         })
+        .then(() => setIsOpen(!isOpen))
 
   }
+
 
   return (
     <>
@@ -110,13 +120,19 @@ function Dashboard(props) {
         </Col>
       </Row>
 
-      <Button onClick={() => getPost(8)}>Toggle one post</Button>
+      {isOpen ?
+      <div className="d-flex flex-column align-items-center">
+        <div className="post-mask" onClick={() => setIsOpen(false)}></div>
+        <OnePost postProp={post} commentsProp={comments}/>
+      </div>
+      : null
+      }
 
-      {isOpen ? <OnePost postProp={post} commentsProp={comments}/> : null}
 
-      <Row className="gx-4 gy-5 mt-3 mx-auto" style={{width:'50%'}}>
+
+      <Row className="gx-4 gy-5 mt-3 mx-auto w-50">
         {postList.map(post => 
-          <Card className="Postcard text-start" border="0" style={{}}>
+          <Card className="Postcard text-start" border="0" onClick={() => getPost(`${post.pid}`)}>
               <Card.Title>
                 <div className = "username mb-1"> 
                   {post.uid}

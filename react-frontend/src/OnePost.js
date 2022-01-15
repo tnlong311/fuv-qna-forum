@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import ReactDOM from "react-dom";
 import "./OnePost.css"
 import {Image, Button, Row, Form, FormGroup, ControlLabel, FormControl, HelpBlock, InputGroup} from "react-bootstrap"
 import axios from 'axios'
-import { getToken } from './Utils/Common'
+import { getToken, getUser } from './Utils/Common'
 
-function OnePost({postProp, commentsProp}) {
-  const [post, setPost] = useState(postProp)
-  const [comments, setComments] = useState(commentsProp)
+function OnePost({postProp, commentsProp}){
+  const [post, setPost] = useState([])
+  const [comments, setComments] = useState([])
+
+  useEffect(() => {
+    setPost(postProp);
+    setComments(commentsProp);
+  }, [])
 
   const PostView = () => {
     const postUserName = post.userName
@@ -53,17 +59,30 @@ function OnePost({postProp, commentsProp}) {
 
   const NewComment = () => {
     const [cmtContent, setCmtContent] = useState("")
+    const [cmtDto, setCmtDto] = useState({})
+
+    useEffect(() => {
+      if (Object.keys(cmtDto).length != 0) {
+        let newCmtList = [cmtDto, ...comments];
+        setComments(newCmtList)
+        console.log("New comment posted!")
+
+        setCmtDto({})
+      }
+    }, [cmtDto])
 
     const handleCommentChange = (cmtContent) => {
       setCmtContent(cmtContent.target.value)
     }
 
     const handleNewCommentSuccess = () => {
-      console.log("post new comment successfully")
-      let newCommentDto = comments[0]
-      comments.splice(0, 0, newCommentDto)
-
-      setComments(comments)
+      setCmtDto({
+        content: cmtContent,
+        likes: 0,
+        pid: post.pid,
+        userName: getUser(),
+        createdDate: new Date().toLocaleTimeString()
+      })
     }
 
     const handleNewComment = async () => {
