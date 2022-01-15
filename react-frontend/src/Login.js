@@ -7,7 +7,6 @@ import './App.css';
 import Cookies from 'js-cookie';
 import history from './history';
 import {Link, Navigate, Route, Router, useHref } from 'react-router-dom';
-import OnePost from './OnePost'
 //import { useRouter } from "next/router";
 
 function Login(props) {
@@ -16,9 +15,6 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [post, setPost] = useState('');
-  const [comments, setComments] = useState('');
   //const router = useRouter();
   const params = JSON.stringify({
 
@@ -75,33 +71,8 @@ function Login(props) {
   }
 
 
-  const getPost = (pid) => {
-    let config = {
-      headers: {'Authorization': `Bearer ${getToken()}`},
-    };
-
-    axios.get(`http://localhost:8080/api/comment/all/${pid}`, config)
-        .then((response) => {
-          console.log("Get comment successfully");
-          setComments(response.data);
-        })
-
-    axios.get(`http://localhost:8080/api/posts/${pid}`, config)
-        .then((response) => {
-          console.log("Get post successfully");
-          setPost(response.data)
-
-          setIsOpen(!isOpen)
-        })
-        .catch((err) => {
-          alert("Post does not exist")
-        })
-
-  }
-
-
   return (
-    <div>
+    <div className="text-center">
       Login<br /><br />
       {/* <div>
         Username<br />
@@ -125,11 +96,7 @@ function Login(props) {
         </Button>
       </Form>
 
-      <Button onClick={() => getPost(8)}>Toggle one post</Button>
-
-      {isOpen ? <OnePost postProp={post} commentsProp={comments}/> : null}
-
-     </div>
+   </div>
   );
 }
 

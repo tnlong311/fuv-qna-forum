@@ -1,17 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Dashboard.css'
 import {Router } from 'react-router-dom';
 import history from './history';
 import {Image, Button, Row, Card, Panel, ListGroup, Col, Modal} from "react-bootstrap";
 import axios from 'axios';
 import { getToken, removeUserSession, getUser, setUserSession,  } from './Utils/Common';
-import JoditEditor from "jodit-react";
+import OnePost from './OnePost'
+/*import JoditEditor from "jodit-react";*/
 
 function Dashboard(props) {
   const user = getUser();
   const [title,setTitle] = useState('');
   const [lgShow, setLgShow] = useState(false);
-  
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [post, setPost] = useState('');
+  const [comments, setComments] = useState('');
 
   const [postList, setPostList] = useState([])
   const handleTitleChange = (title) => {
@@ -49,14 +53,38 @@ function Dashboard(props) {
    })
    .then(callback);
  }
+
  function start(){
   getContent(function(posts){
     console.log(posts)
-  })
-}
+    })
+  }
   
-start();
+  start();
 
+  const getPost = (pid) => {
+    let config = {
+      headers: {'Authorization': `Bearer ${getToken()}`},
+    };
+
+    axios.get(`http://localhost:8080/api/comment/all/${pid}`, config)
+        .then((response) => {
+          console.log("Get comment successfully");
+          setComments(response.data);
+        })
+
+    axios.get(`http://localhost:8080/api/posts/${pid}`, config)
+        .then((response) => {
+          console.log("Get post successfully");
+          setPost(response.data)
+
+          setIsOpen(!isOpen)
+        })
+        .catch((err) => {
+          alert("Post does not exist")
+        })
+
+  }
 
   return (
     <>
@@ -82,7 +110,9 @@ start();
         </Col>
       </Row>
 
+      <Button onClick={() => getPost(8)}>Toggle one post</Button>
 
+      {isOpen ? <OnePost postProp={post} commentsProp={comments}/> : null}
 
       <Row className="gx-4 gy-5 mt-3 mx-auto" style={{width:'50%'}}>
         {postList.map(post => 
