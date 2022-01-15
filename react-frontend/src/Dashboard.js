@@ -6,6 +6,7 @@ import {Image, Button, Row, Card, Panel, ListGroup, Col, Modal} from "react-boot
 import axios from 'axios';
 import { getToken, removeUserSession, getUser, setUserSession,  } from './Utils/Common';
 import JoditEditor from "jodit-react";
+
 function Dashboard(props) {
   const user = getUser();
   const [title,setTitle] = useState('');
@@ -36,6 +37,7 @@ function Dashboard(props) {
   var configapi = {
     headers: {'Authorization': `Bearer ${getToken()}`},
   }; 
+  
  function getContent(callback) {
   
    console.log(localStorage.getItem('token'))
@@ -52,7 +54,9 @@ function Dashboard(props) {
     console.log(posts)
   })
 }
+  
 start();
+
 
   return (
     <>

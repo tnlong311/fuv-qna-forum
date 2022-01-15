@@ -2,11 +2,11 @@ import './App.css';
 import React , { useState, useEffect }from 'react';
 import { Navigate, BrowserRouter, Routes,Route, Switch, Router, NavLink } from 'react-router-dom'
 import WelcomePage from './WelcomePage';
-import Restricted from "./Restricted";
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import OnePost from './OnePost';
 import Home from './Home';
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
@@ -47,6 +47,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/post" element={<OnePost />} />
       </Routes>
       </BrowserRouter>
       

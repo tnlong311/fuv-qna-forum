@@ -18,7 +18,7 @@ const WelcomePage = () => {
     fetchWelcomePage();
   }, [])
   return (
-    <div className="App">
+    <div className="text-center">
       <div className="decor" >
       <Image src="/image/Group6.png" alt='decor'/>
       </div>

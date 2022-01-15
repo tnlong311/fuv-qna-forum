@@ -17,6 +17,7 @@ public class CommentDto {
   private LocalDateTime createdDate;
   private int likes;
   private Long Uid;
+  private String userName;
   private Long pid;
 
   public CommentDto(Comment comment) {
@@ -25,6 +26,7 @@ public class CommentDto {
     this.likes = comment.getLikes();
     this.createdDate = comment.getCreatedDate();
     this.Uid = comment.getUser().getUid();
+    this.userName = comment.getUser().getUsername();
     this.pid = comment.getPost().getPid();
   }
 }

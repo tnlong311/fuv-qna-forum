@@ -8,12 +8,18 @@ import {useEffect} from "react";
 import Cookies from 'js-cookie';
 import history from './history';
 import {Link, Navigate, Route, Router, useHref } from 'react-router-dom';
+import OnePost from './OnePost'
 //import { useRouter } from "next/router";
+
 function Login(props) {
   const [loading, setLoading] = useState(false);
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [post, setPost] = useState('');
+  const [comments, setComments] = useState('');
   //const router = useRouter();
   const params = JSON.stringify({
 
@@ -68,6 +74,33 @@ function Login(props) {
   const handlePasswordChange = (password) => {
     setPassword(password.target.value);
   }
+
+
+  const getPost = (pid) => {
+    let config = {
+      headers: {'Authorization': `Bearer ${getToken()}`},
+    };
+
+    axios.get(`http://localhost:8080/api/comment/all/${pid}`, config)
+        .then((response) => {
+          console.log("Get comment successfully");
+          setComments(response.data);
+        })
+
+    axios.get(`http://localhost:8080/api/posts/${pid}`, config)
+        .then((response) => {
+          console.log("Get post successfully");
+          setPost(response.data)
+
+          setIsOpen(!isOpen)
+        })
+        .catch((err) => {
+          alert("Post does not exist")
+        })
+
+  }
+
+
   return (
     <div>
       Login<br /><br />
@@ -92,6 +125,11 @@ function Login(props) {
           Submit
         </Button>
       </Form>
+
+      <Button onClick={() => getPost(5)}>Toggle one post</Button>
+
+      {isOpen ? <OnePost post={post} comments={comments}/> : null}
+
      </div>
   );
 }
