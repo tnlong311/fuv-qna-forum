@@ -8,20 +8,22 @@ import { getToken, removeUserSession, getUser, setUserSession,  } from './Utils/
 import OnePost from './OnePost'
 /*import JoditEditor from "jodit-react";*/
 
-function Dashboard(props) {
-  const user = getUser();
-  const [title,setTitle] = useState('');
-  const [lgShow, setLgShow] = useState(false);
+const Dashboard = (props) => {
+  const user = getUser()
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [post, setPost] = useState('');
-  const [comments, setComments] = useState('');
+  // new post toggle
+  const [lgShow, setLgShow] = useState(false)
 
+  // For single post view
+  const [isOpen, setIsOpen] = useState(false)
+  const [pid, setPid] = useState(0)
+
+  // all posts
   const [postList, setPostList] = useState([])
 
-  const handleTitleChange = (title) => {
-    setTitle(title.target.value)
-  }
+  // watch for new post created
+  const [postStatus, setPostStatus] = useState(0)
+
   // handle click event of logout button
   const handleLogout = () => {
     removeUserSession();
@@ -29,17 +31,14 @@ function Dashboard(props) {
     window.location.reload(false);
     //Router.push("/login");
   }
-  
-  const handleNewpost = () => {
-    axios.post('http://localhost:8080/api/auth/signin',{title:title, content:content}, configapi)
-  }
-  const editor = useRef(null)
-	const [content, setContent] = useState('')
 
-	const config = {
+  /*const editor = useRef(null)*/
+
+	/*const config = {
 		readonly: false // all options from https://xdsoft.net/jodit/doc/
-	}
-  var configapi = {
+	}*/
+
+  const configapi = {
     headers: {'Authorization': `Bearer ${getToken()}`},
   };
 
@@ -47,61 +46,82 @@ function Dashboard(props) {
     axios.get('http://localhost:8080/api/posts/all', configapi)
         .then((response) => {
           setPostList(response.data)
-          console.log(response.data)
         })
-  }, [])
+  }, [postStatus])
 
-  
- /*function getContent(callback) {
-  
-   /!*console.log(localStorage.getItem('token'))*!/
-   axios.get('http://localhost:8080/api/posts/all', configapi)
-   .then((response) => {
-      setPostList(response.data)
-    console.log(response.data)
-     return response;
-   })
-   /!*.then(callback);*!/
- }
-
- function start(){
-  getContent(function(posts){
-    /!*console.log(posts)*!/
-    })
+  const getOnePost = (pid) => {
+    setPid(pid)
+    setIsOpen(!isOpen)
   }
-  
-  start();*/
 
-  const getPost = (pid) => {
-    let config = {
-      headers: {'Authorization': `Bearer ${getToken()}`},
-    };
+  const NewPost = () => {
+    const [postTitle, setPostTitle] = useState('');
+    const [postContent, setPostContent] = useState('');
 
-    axios.get(`http://localhost:8080/api/comment/all/${pid}`, config)
-        .then((response) => {
-          console.log("Get comment successfully");
-          setComments(response.data);
-        })
+    const handleTitleChange = (postTitle) => {
+      setPostTitle(postTitle.target.value)
+    }
 
-    axios.get(`http://localhost:8080/api/posts/${pid}`, config)
-        .then((response) => {
-          console.log("Get post successfully");
-          setPost(response.data)
-        })
-        .catch((err) => {
-          alert("Post does not exist")
-        })
-        .then(() => setIsOpen(!isOpen))
+    const handleContentChange = (postContent) => {
+      setPostContent(postContent.target.value)
+    }
 
+    const handleNewPostSuccess = () => {
+      console.log("New post created!")
+      setPostStatus(postStatus+1)
+    }
+
+    const handleNewPost = () => {
+      if(postTitle != '' && postContent != ''){
+        setLgShow(false)
+
+        axios.post('http://localhost:8080/api/posts',{title: postTitle, content: postContent}, configapi)
+            .then(() => handleNewPostSuccess())
+            .catch(error => alert("Something went wrong!"))
+      } else {
+        alert("Please fill in all fields!")
+      }
+    }
+
+    return (
+        <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="model-sizes-title-lg"
+            className="Postmodal "
+            centered
+            style={{marginLeft: 'auto', marginRight: 'auto'}}
+        >
+          <Modal.Body style={{}}>
+            <div className="md-form mb-5">
+              <input type="text" className="form-control validate mb-3" placeholder='Add title' value={postTitle}
+                     onChange={handleTitleChange}/>
+              <textarea name="textValue" rows="4" wrap="hard" className="form-control validate text-nowrap"
+                        placeholder='Add content' value={postContent} onChange={handleContentChange}/>
+            </div>
+
+            <Row>
+              <Col xl={10} style={{padding:"0px"}}>
+                <Button className="modalButton float-end" onClick={() => setLgShow(false)}>Cancel</Button>
+              </Col>
+              <Col xl={2} style={{paddingLeft:"0px"}}>
+                <Button className="modalButton float-end" onClick={() => handleNewPost()}>Post</Button>
+              </Col>
+            </Row>
+
+          </Modal.Body>
+        </Modal>
+    )
   }
 
 
   return (
     <>
-    <div className="decor" >
-      <Image src="/image/Group6.png" alt='decor'/>
+      <div className="decor" >
+        <Image src="/image/Group6.png" alt='decor'/>
       </div>
-      
+
       <Row className="mb-2">
         <Col xl={2} className='pt-4 pl-3'>
         <Image src='/image/logo_Fulbright.svg' alt='logo' style={{width:"60%", height:"auto"}}/>
@@ -115,7 +135,8 @@ function Dashboard(props) {
         <Button className="mt-4 logSignButton"
              onClick={handleLogout}>
             Log out</Button>
-        <Button className="mt-4 NewpostButton" id="get-started_main-menu_get-started-modal" variant="primary" size={"md"} onClick={() => setLgShow(true)}> 
+        <Button className="mt-4 NewpostButton" id="get-started_main-menu_get-started-modal" variant="primary"
+                size={"md"} onClick={() => setLgShow(true)}>
             New post</Button>
         </Col>
       </Row>
@@ -123,16 +144,15 @@ function Dashboard(props) {
       {isOpen ?
       <div className="d-flex flex-column align-items-center">
         <div className="post-mask" onClick={() => setIsOpen(false)}></div>
-        <OnePost postProp={post} commentsProp={comments}/>
+        <OnePost pid={pid}/>
       </div>
       : null
       }
 
 
-
-      <Row className="gx-4 gy-5 mt-3 mx-auto w-50">
+      <Row className="gx-4 gy-5 my-3 mx-auto w-50">
         {postList.map(post => 
-          <Card className="Postcard text-start" border="0" onClick={() => getPost(`${post.pid}`)}>
+          <Card className="Postcard text-start" border="0" onClick={() => getOnePost(`${post.pid}`)}>
               <Card.Title>
                 <div className = "username mb-1"> 
                   {post.uid}
@@ -154,45 +174,7 @@ function Dashboard(props) {
           )}
       </Row>
 
-
-      <Modal
-        size="lg"
-       
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="model-sizes-title-lg"
-        className="Postmodal "
-        centered
-        style={{marginLeft: 'auto', marginRight: 'auto'}}
-      >
-      <Modal.Body style={{}}> 
-                <div className="md-form mb-5">
-                  <input type="text" className="form-control validate mb-3" placeholder='Add title'value={title} onChange={handleTitleChange}/>
-                  <textarea name="textValue" rows="4" wrap="hard" className="form-control validate text-nowrap" placeholder='Add content'/>
-                  {/* <JoditEditor
-                            ref={editor}
-                            placeholder='aloalo'
-                              value={content}
-                              config={config}
-                              tabIndex={1} // tabIndex of textarea
-                              onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                              onChange={() => {handleNewContent}}
-                          /> */}
-                  
-                </div>
-                <Row>
-                  <Col xl={10} style={{padding:"0px"}}>
-                    <Button className="modalButton float-end" onClick={() => setLgShow(false)}>Cancel</Button>
-                  </Col>
-                  <Col xl={2} style={{paddingLeft:"0px"}}>
-                    <Button className="modalButton float-end" onClick={(handleNewpost) => setLgShow(false)}>Post</Button>
-                  </Col>
-                  
-                </Row>
-                  
-      </Modal.Body>
-      </Modal>
-
+      <NewPost />
       
     </> 
   );
