@@ -5,13 +5,26 @@ import {Image, Button, Row, Form, FormGroup, ControlLabel, FormControl, HelpBloc
 import axios from 'axios'
 import { getToken, getUser } from './Utils/Common'
 
-function OnePost({postProp, commentsProp}){
+function OnePost({pid}){
   const [post, setPost] = useState([])
   const [comments, setComments] = useState([])
 
+  const configapi = {
+    headers: {'Authorization': `Bearer ${getToken()}`},
+  };
+
   useEffect(() => {
-    setPost(postProp);
-    setComments(commentsProp);
+    axios.get(`http://localhost:8080/api/comment/all/${pid}`, configapi)
+        .then((response) => {
+          console.log("Get comment successfully");
+          setComments(response.data);
+        })
+
+    axios.get(`http://localhost:8080/api/posts/${pid}`, configapi)
+        .then((response) => {
+          console.log("Get post successfully");
+          setPost(response.data)
+        })
   }, [])
 
   const PostView = () => {
@@ -33,6 +46,7 @@ function OnePost({postProp, commentsProp}){
         </div>
     )
   }
+
   const CommentView = () => {
     return (
         <div className="cmts-wrap">
@@ -49,7 +63,7 @@ function OnePost({postProp, commentsProp}){
               </div>
             ))
             :
-            <div className="cmt-wrap d-flex flex-column text-center">
+            <div className="cmt-wrap d-flex flex-column align-items-center justify-content-center">
               <div className="not-found qna-heading-3">No comments yet...</div>
             </div>
           }
@@ -59,30 +73,26 @@ function OnePost({postProp, commentsProp}){
 
   const NewComment = () => {
     const [cmtContent, setCmtContent] = useState("")
-    const [cmtDto, setCmtDto] = useState({})
+    const [newCmtStatus, setNewCmtStatus] = useState([0])
 
+    // watch for new comment created events
     useEffect(() => {
-      if (Object.keys(cmtDto).length != 0) {
-        let newCmtList = [cmtDto, ...comments];
-        setComments(newCmtList)
-        console.log("New comment posted!")
-
-        setCmtDto({})
+      if(newCmtStatus != 0){
+        axios.get(`http://localhost:8080/api/comment/all/${pid}`, configapi)
+            .then((response) => {
+              console.log("Get comment successfully");
+              setComments(response.data);
+            })
       }
-    }, [cmtDto])
+    }, [newCmtStatus])
 
     const handleCommentChange = (cmtContent) => {
       setCmtContent(cmtContent.target.value)
     }
 
     const handleNewCommentSuccess = () => {
-      setCmtDto({
-        content: cmtContent,
-        likes: 0,
-        pid: post.pid,
-        userName: getUser(),
-        createdDate: new Date().toLocaleTimeString()
-      })
+      setNewCmtStatus(newCmtStatus+1)
+      console.log("New comment posted")
     }
 
     const handleNewComment = async () => {

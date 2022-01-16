@@ -9,15 +9,14 @@ import OnePost from './OnePost'
 /*import JoditEditor from "jodit-react";*/
 
 const Dashboard = (props) => {
-  const user = getUser();
+  const user = getUser()
 
   // new post toggle
-  const [lgShow, setLgShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false)
 
   // For single post view
-  const [isOpen, setIsOpen] = useState(false);
-  const [post, setPost] = useState([]);
-  const [comments, setComments] = useState([]);
+  const [isOpen, setIsOpen] = useState(false)
+  const [pid, setPid] = useState(0)
 
   // all posts
   const [postList, setPostList] = useState([])
@@ -51,23 +50,9 @@ const Dashboard = (props) => {
   }, [postStatus])
 
   const getOnePost = (pid) => {
-    axios.get(`http://localhost:8080/api/comment/all/${pid}`, configapi)
-        .then((response) => {
-          console.log("Get comment successfully");
-          setComments(response.data);
-        })
-
-    axios.get(`http://localhost:8080/api/posts/${pid}`, configapi)
-        .then((response) => {
-          console.log("Get post successfully");
-          setPost(response.data)
-        })
-        .catch((err) => {
-          alert("Post does not exist")
-        })
-        .then(() => setIsOpen(!isOpen))
+    setPid(pid)
+    setIsOpen(!isOpen)
   }
-
 
   const NewPost = () => {
     const [postTitle, setPostTitle] = useState('');
@@ -159,7 +144,7 @@ const Dashboard = (props) => {
       {isOpen ?
       <div className="d-flex flex-column align-items-center">
         <div className="post-mask" onClick={() => setIsOpen(false)}></div>
-        <OnePost postProp={post} commentsProp={comments}/>
+        <OnePost pid={pid}/>
       </div>
       : null
       }
