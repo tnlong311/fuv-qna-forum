@@ -22,7 +22,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Uid") //Change from id -> Uid
+    @Column(name = "Uid")
     private Long Uid;
 
     @NotBlank
@@ -43,9 +43,13 @@ public class User {
     @Email
     private String email;
 
-    @JsonIgnore //Should add this annotation?
-    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> comments;
 
     public User(String username, String email, String password) {
         this.username = username;

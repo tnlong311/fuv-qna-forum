@@ -18,13 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//JWTAuthenticationFilter to implement a filter that -
-//
-//reads JWT authentication token from the Authorization header of all the requests  validates the token
-//loads the user details associated with that token. Sets the user details in Spring Security’s SecurityContext.
-//Spring Security uses the user details to perform authorization checks. We can also access the user details
-//stored in the SecurityContext in our controllers to perform our business logic.
-
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationFilter.class);

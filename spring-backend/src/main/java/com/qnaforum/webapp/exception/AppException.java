@@ -8,11 +8,6 @@ public class AppException extends RuntimeException {
     private String exceptionCode;
     private HttpStatus httpStatus;
 
-    public AppException(Throwable cause, HttpStatus httpStatus) {
-        super(cause);
-        setHttpStatus(httpStatus);
-    }
-
     public AppException(String message, HttpStatus httpStatus) {
         super(message);
         setHttpStatus(httpStatus);
@@ -21,18 +16,6 @@ public class AppException extends RuntimeException {
     public AppException(String message) {
         super(message);
         setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    public String getExceptionCode() {
-        return exceptionCode;
-    }
-
-    public void setExceptionCode(String exceptionCode) {
-        this.exceptionCode = exceptionCode;
-    }
-
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
     }
 
     public void setHttpStatus(HttpStatus httpStatus) {

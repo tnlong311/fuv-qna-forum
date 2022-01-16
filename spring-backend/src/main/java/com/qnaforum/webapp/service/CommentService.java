@@ -11,5 +11,4 @@ public interface CommentService {
   public Page<Comment> findAllByPid(Long pid, Pageable pageable);
 
   public void addComment(CommentDto commentDto);
-
 }

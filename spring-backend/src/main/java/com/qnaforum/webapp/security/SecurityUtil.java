@@ -1,21 +1,19 @@
 package com.qnaforum.webapp.security;
 
-import com.qnaforum.webapp.service.CustomUserDetailsService;
-import org.springframework.security.core.Authentication;
+
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
 public class SecurityUtil {
 
-    public static Optional<CustomUserDetailsService> getCurrentUserLogin() {
+    public static Optional<UserPrincipal> getCurrentUserLogin() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(securityContext.getAuthentication())
                 .map(authentication -> {
-                    if (authentication.getPrincipal() instanceof CustomUserDetailsService) {
-                        return (CustomUserDetailsService) authentication.getPrincipal();
+                    if (authentication.getPrincipal() instanceof UserPrincipal) {
+                        return (UserPrincipal) authentication.getPrincipal();
                     }
                     return null;
                 });

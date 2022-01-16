@@ -44,7 +44,7 @@ public class PostController {
         if (pid == null) {
             throw new AppException("Post pid cannot null", HttpStatus.NOT_FOUND);
         } else {
-            postService.deletePost(id);
+            postService.deletePost(pid);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }

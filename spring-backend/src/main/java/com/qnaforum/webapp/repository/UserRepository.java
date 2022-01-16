@@ -22,10 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsernameOrEmail(String username, String email);
 
-    default User getUser(UserPrincipal currentUser) {
-        return getUserByName(currentUser.getUsername());
-    }
-
     default User getUserByName(String username) {
         return findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));

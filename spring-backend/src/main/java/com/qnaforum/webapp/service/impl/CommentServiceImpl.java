@@ -1,11 +1,13 @@
 package com.qnaforum.webapp.service.impl;
 
+import com.qnaforum.webapp.exception.AppException;
 import com.qnaforum.webapp.model.dto.CommentDto;
 import com.qnaforum.webapp.model.entity.Comment;
 import com.qnaforum.webapp.model.entity.Post;
 import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.repository.CommentRepository;
 import com.qnaforum.webapp.repository.PostRepository;
+import com.qnaforum.webapp.security.SecurityUtil;
 import com.qnaforum.webapp.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,7 +35,6 @@ public class CommentServiceImpl implements CommentService {
         String content = commentDto.getContent();
         LocalDateTime createdDate = LocalDateTime.now();
         User user = userDetailsService.getCurrentUserByUsername();
-        // need handle empty post exception
         Post post = postRepository.getById(commentDto.getPid());
 
         Comment comment = new Comment(content, createdDate, user, post);

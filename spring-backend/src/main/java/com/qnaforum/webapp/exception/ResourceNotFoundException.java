@@ -22,26 +22,4 @@ public class ResourceNotFoundException extends RuntimeException {
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
-
-    public String getResourceName() {
-        return resourceName;
-    }
-
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public Object getFieldValue() {
-        return fieldValue;
-    }
-
-    public ApiResponse getApiResponse() {
-        return apiResponse;
-    }
-
-    private void setApiResponse() {
-        String message = String.format("%s not found with %s: '%s'", resourceName, fieldName, fieldValue);
-
-        apiResponse = new ApiResponse(Boolean.FALSE, message);
-    }
 }

@@ -15,5 +15,5 @@ public interface PostService {
 
     Page<Post> findAllByOrderByCreatedDateDescPageable(Pageable pageable);
 
-    public void deletePost(Long id);
+    public void deletePost(Long pid);
 }
