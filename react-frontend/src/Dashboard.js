@@ -23,6 +23,8 @@ const Dashboard = (props) => {
 
   // watch for new post created
   const [postStatus, setPostStatus] = useState(0)
+  // watch for post deleted
+  const [deleteStatus, setDeleteStatus] = useState(0)
 
   // handle click event of logout button
   const handleLogout = () => {
@@ -31,12 +33,6 @@ const Dashboard = (props) => {
     window.location.reload(false);
     //Router.push("/login");
   }
-
-  /*const editor = useRef(null)*/
-
-	/*const config = {
-		readonly: false // all options from https://xdsoft.net/jodit/doc/
-	}*/
 
   const configapi = {
     headers: {'Authorization': `Bearer ${getToken()}`},
@@ -47,14 +43,19 @@ const Dashboard = (props) => {
         .then((response) => {
           setPostList(response.data)
         })
-  }, [postStatus])
+  }, [postStatus, deleteStatus])
 
   const getOnePost = (pid) => {
     setPid(pid)
     setIsOpen(!isOpen)
   }
-  const DeletePost = (pid) => {
+
+  const deletePost = (pid) => {
     axios.delete(`http://localhost:8080/api/posts/${pid}`, configapi)
+        .then(() => {
+          setDeleteStatus(deleteStatus+1)
+          console.log("delete post successfully")
+        })
         .catch(error => alert("You are only able to delete your own posts"))
   }
 
@@ -162,7 +163,7 @@ const Dashboard = (props) => {
                 <Dropdown.Toggle className="dropdowndash" variant="success" id="dropdown-basic">
                 </Dropdown.Toggle>
                 <Dropdown.Menu className=''>
-                  <Dropdown.Item className="delete" onClick={() => DeletePost(`${post.pid}`)}>Delete</Dropdown.Item>
+                  <Dropdown.Item className="delete" onClick={() => deletePost(`${post.pid}`)}>Delete</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
                 <div className = "username mb-1"> 
