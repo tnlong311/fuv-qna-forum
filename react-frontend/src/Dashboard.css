@@ -3,7 +3,12 @@
     border-radius: 30px;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(142,142,142,0.24);
+    box-shadow: 0px 0px 10px 1px rgba(142,142,142,0.24);
   }
+.Postcard:hover {
+    background-color: #eaeaea;
+}
 .listPost{
     padding-bottom: 3rem;
 }
