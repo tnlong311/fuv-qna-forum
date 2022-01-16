@@ -68,3 +68,9 @@
     background-color: black;
     z-index: 5;
 }
+.dropdowndash{
+    background-color:#00196E!important;
+}
+.delete:active{
+    background-color: #FFAD1D!important;
+}

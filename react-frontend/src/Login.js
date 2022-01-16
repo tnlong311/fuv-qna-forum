@@ -3,11 +3,10 @@ import axios from 'axios';
 import { getToken, setUserSession } from './Utils/Common';
 import {Image, Button, Row, Form, FormGroup, ControlLabel, FormControl, HelpBlock, InputGroup} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
+import './css/App.css';
 import Cookies from 'js-cookie';
 import history from './history';
 import {Link, Navigate, Route, Router, useHref } from 'react-router-dom';
-//import { useRouter } from "next/router";
 
 function Login(props) {
   const [loading, setLoading] = useState(false);
@@ -15,20 +14,6 @@ function Login(props) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  //const router = useRouter();
-  const params = JSON.stringify({
-
-    "usernameOrEmail":usernameOrEmail,
-    "password":password
-    
-    });
-  // const isActive = (route) => {
-  //     return router.route === route ? "active" : null;
-  // };
-  
-  // const isParentActive = (route) => {
-  //     return router.route.indexOf(route) > -1 ? "active" : null;
-  // };
   var config = {
       headers: {
         "Content-Type": 'application/json',
@@ -44,13 +29,7 @@ function Login(props) {
       console.log(response.data.accessToken)
       window.localStorage.setItem('token', response.data.accessToken);
       window.localStorage.setItem('user', JSON.stringify(usernameOrEmail));
-      // setUserSession(response.data.accessToken, usernameOrEmail);
-      //console.log(getToken())
       history.push('/dashboard');
-      //window.location.reload(false);
-      // <Link 
-      // to={'/dashboard'}{...props}/>
-      //window.open('/dashboard')
     }).catch(error => {
       setLoading(false);
       if (error.response) {
@@ -73,26 +52,27 @@ function Login(props) {
 
   return (
     <div className="text-center">
-      Login<br /><br />
-      {/* <div>
-        Username<br />
-        <input type="text" {...usernameOrEmail} autoComplete="new-password" />
-      </div> */}
+      <div className="decor" >
+        <Image src="/image/Group6.png" alt='decor'/>
+      </div>
+      <div className='mt-3 mb-3'>
+          <Image src='/image/logo_Fulbright.svg' alt='logo'/>
+        </div>
+      <div className="Nameapp mb-3">
+            Fulbright Forum
+      </div>      
       <Form>
-        <Form.Group className="mb-3" >
-          <Form.Label>Email address</Form.Label>
-          <Form.Control className="mx-auto" type="text" placeholder="Enter email" style={{maxWidth:"200px", alignItems:"center"}} value={usernameOrEmail} onChange={handleEmailChange}/>
+        <Form.Group className="mb-3 posttitle" >
+          <Form.Label>Username</Form.Label>
+          <Form.Control className="mx-auto" type="text" placeholder="Enter username" style={{maxWidth:"200px", alignItems:"center"}} value={usernameOrEmail} onChange={handleEmailChange}/>
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3 posttitle" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control className="mx-auto"  type="password" placeholder="Password" style={{maxWidth:"200px"}} value={password} onChange={handlePasswordChange}/>
         </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button href="#0" variant="primary" type="submit" onClick={handleLogin}>
-          Submit
+        <Button href="#0"  className='signlogbut' variant="primary" type="submit" onClick={handleLogin}>
+          Login
         </Button>
       </Form>
 

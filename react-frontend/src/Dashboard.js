@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './Dashboard.css'
+import './css/Dashboard.css'
 import {Router } from 'react-router-dom';
 import history from './history';
-import {Image, Button, Row, Card, Panel, ListGroup, Col, Modal} from "react-bootstrap";
+import {Image, Button, Row, Card, Panel, ListGroup, Col, Modal, Dropdown} from "react-bootstrap";
 import axios from 'axios';
 import { getToken, removeUserSession, getUser, setUserSession,  } from './Utils/Common';
 import OnePost from './OnePost'
@@ -53,6 +53,10 @@ const Dashboard = (props) => {
     setPid(pid)
     setIsOpen(!isOpen)
   }
+  const DeletePost = (pid) => {
+    axios.delete(`http://localhost:8080/api/posts/${pid}`, configapi)
+        .catch(error => alert("You are only able to delete your own posts"))
+  }
 
   const NewPost = () => {
     const [postTitle, setPostTitle] = useState('');
@@ -83,6 +87,7 @@ const Dashboard = (props) => {
       }
     }
 
+     
     return (
         <Modal
             size="lg"
@@ -121,10 +126,9 @@ const Dashboard = (props) => {
       <div className="decor" >
         <Image src="/image/Group6.png" alt='decor'/>
       </div>
-
       <Row className="mb-2">
         <Col xl={2} className='pt-4 pl-3'>
-        <Image src='/image/logo_Fulbright.svg' alt='logo' style={{width:"60%", height:"auto"}}/>
+          <Image className="ml-3" src='/image/logo_Fulbright.svg' alt='logo' style={{width:"60%", height:"auto", marginLeft: "20%"}}/>
         </Col>
         <Col xl={7}>
           <div className="Nameapp pt-5 text-start">
@@ -152,16 +156,23 @@ const Dashboard = (props) => {
 
       <Row className="gx-4 gy-5 my-3 mx-auto w-50">
         {postList.map(post => 
-          <Card className="Postcard text-start" border="0" onClick={() => getOnePost(`${post.pid}`)}>
+          <Card className="Postcard text-start" border="0" >
               <Card.Title>
+              <Dropdown className='float-end'>
+                <Dropdown.Toggle className="dropdowndash" variant="success" id="dropdown-basic">
+                </Dropdown.Toggle>
+                <Dropdown.Menu className=''>
+                  <Dropdown.Item className="delete" onClick={() => DeletePost(`${post.pid}`)}>Delete</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
                 <div className = "username mb-1"> 
-                  {post.uid}
+                  {post.userName}
                 </div>
                 <div className="datecre mb-2">
                   {new Date(post.createdDate).toDateString()}
                 </div>
               </Card.Title>
-              <Card.Text>
+              <Card.Text onClick={() => getOnePost(`${post.pid}`)}>
                 <div className="posttitle mb-1">
                   {post.title}
                 </div>

@@ -1,6 +1,6 @@
 import {Image, Button, Row} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
+import './css/App.css';
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import axios from "axios";
@@ -24,8 +24,11 @@ const WelcomePage = () => {
       </div>
       <div className="container">
       <Row>
-        <div className='mt-5 mb-5'>
+        <div className='mt-5 mb-3'>
           <Image src='/image/logo_Fulbright.svg' alt='logo'/>
+        </div>
+        <div className="Nameapp mb-5">
+            Fulbright Forum
         </div>
       </Row>
       <Row >

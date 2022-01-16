@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import React , { useState, useEffect }from 'react';
 import { Navigate, BrowserRouter, Routes,Route, Switch, Router, NavLink } from 'react-router-dom'
 import WelcomePage from './WelcomePage';
