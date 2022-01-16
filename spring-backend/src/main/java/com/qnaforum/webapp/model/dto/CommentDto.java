@@ -2,7 +2,6 @@ package com.qnaforum.webapp.model.dto;
 
 import com.qnaforum.webapp.model.entity.Comment;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

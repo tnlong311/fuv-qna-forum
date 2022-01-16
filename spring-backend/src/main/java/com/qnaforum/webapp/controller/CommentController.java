@@ -1,6 +1,5 @@
 package com.qnaforum.webapp.controller;
 
-import com.qnaforum.webapp.exception.AppException;
 import com.qnaforum.webapp.model.dto.CommentDto;
 import com.qnaforum.webapp.model.entity.Comment;
 import com.qnaforum.webapp.service.CommentService;
@@ -32,5 +31,4 @@ public class CommentController {
     Page<CommentDto> commentDto = commentList.map(comment -> new CommentDto((comment)));
     return new ResponseEntity<>(commentDto.getContent(), HttpStatus.OK);
   }
-
 }

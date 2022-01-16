@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
-/*@Slf4j *//* for logging*/
 public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -39,8 +38,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomU
     @Override
     @Transactional
     public User getCurrentUserByUsername() {
-        /*org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
-            getContext().getAuthentication().getPrincipal();*/
         com.qnaforum.webapp.security.UserPrincipal principal = (com.qnaforum.webapp.security.UserPrincipal) SecurityContextHolder.
             getContext().getAuthentication().getPrincipal();
         return userRepository.findByUsername(principal.getUsername())

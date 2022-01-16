@@ -12,5 +12,4 @@ public interface CustomUserDetailsService{
     UserDetails loadUserById(Long id);
 
     User getCurrentUserByUsername();
-
 }

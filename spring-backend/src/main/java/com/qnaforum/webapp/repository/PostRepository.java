@@ -1,7 +1,6 @@
 package com.qnaforum.webapp.repository;
 
 import com.qnaforum.webapp.model.entity.Post;
-import com.qnaforum.webapp.model.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findAllByOrderByCreatedDateDesc(Pageable pageable);
 
-    Optional<Post> findById(Long id);
+    Optional<Post> findById(Long pid);
 
 
 }

@@ -35,13 +35,9 @@ public class Post {
     private LocalDateTime createdDate;
 
     @Column(name = "Likes")
-    private int likes; //int or Long?
+    private int likes;
 
-    /*@CreatedBy
-    @Column(name = "Created_by", length = 50, updatable = false)
-    private String createdBy;*/
-
-    @ManyToOne(fetch = FetchType.LAZY) //LAZY or  EAGER?
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotEmpty
     @JoinColumn(name = "Uid", referencedColumnName = "Uid")
     private User user;

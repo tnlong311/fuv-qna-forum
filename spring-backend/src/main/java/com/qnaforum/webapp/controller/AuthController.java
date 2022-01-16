@@ -1,11 +1,10 @@
 package com.qnaforum.webapp.controller;
 
 import com.qnaforum.webapp.exception.AppException;
+import com.qnaforum.webapp.model.dto.UserDto;
 import com.qnaforum.webapp.model.entity.User;
 import com.qnaforum.webapp.payload.ApiResponse;
 import com.qnaforum.webapp.payload.JwtAuthenticationResponse;
-import com.qnaforum.webapp.payload.LoginRequest;
-import com.qnaforum.webapp.payload.SignUpRequest;
 import com.qnaforum.webapp.repository.UserRepository;
 import com.qnaforum.webapp.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +41,9 @@ public class AuthController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/signin")
-    public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtAuthenticationResponse> authenticateUser(@Valid @RequestBody UserDto userDto) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmail(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(userDto.getUsernameOrEmail(), userDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -53,20 +52,20 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
+    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody UserDto userDto) {
+        if (Boolean.TRUE.equals(userRepository.existsByUsername(userDto.getUsername()))) {
             throw new AppException("Username is already taken", HttpStatus.BAD_REQUEST);
         }
 
-        if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
+        if (Boolean.TRUE.equals(userRepository.existsByEmail(userDto.getEmail()))) {
             throw new AppException("Email is already taken", HttpStatus.BAD_REQUEST);
         }
 
-        String username = signUpRequest.getUsername().toLowerCase(); //Should it be LowerCase()
+        String username = userDto.getUsername().toLowerCase();
 
-        String email = signUpRequest.getEmail().toLowerCase(); //Should it be LowerCase()
+        String email = userDto.getEmail().toLowerCase();
 
-        String password = passwordEncoder.encode(signUpRequest.getPassword());
+        String password = passwordEncoder.encode(userDto.getPassword());
 
         User user = new User(username, email, password);
 
