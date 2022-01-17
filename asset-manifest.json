@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/fuv-qna-forum/static/css/main.d303cb12.css",
+    "main.js": "/fuv-qna-forum/static/js/main.fa509ae4.js",
+    "index.html": "/fuv-qna-forum/index.html",
+    "main.d303cb12.css.map": "/fuv-qna-forum/static/css/main.d303cb12.css.map",
+    "main.fa509ae4.js.map": "/fuv-qna-forum/static/js/main.fa509ae4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d303cb12.css",
+    "static/js/main.fa509ae4.js"
+  ]
+}
