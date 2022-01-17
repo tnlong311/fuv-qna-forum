@@ -8,6 +8,7 @@
   }
 .Postcard:hover {
     background-color: #eaeaea;
+    cursor:pointer;
 }
 .listPost{
     padding-bottom: 3rem;
