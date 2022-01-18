@@ -35,7 +35,7 @@ const WelcomePage = () => {
         <div >
           <Button className="mb-3 logSignButton"
              href="/login">
-            Login</Button>
+            Log in</Button>
         </div>
       </Row>
       <Row >

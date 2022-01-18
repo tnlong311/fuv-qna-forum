@@ -72,7 +72,7 @@ function Login(props) {
           <Form.Control className="mx-auto"  type="password" placeholder="Password" style={{maxWidth:"200px"}} value={password} onChange={handlePasswordChange}/>
         </Form.Group>
         <Button href="#0"  className='signlogbut' variant="primary" type="submit" onClick={handleLogin}>
-          Login
+          Log in
         </Button>
       </Form>
 
