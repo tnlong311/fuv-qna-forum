@@ -49,6 +49,9 @@
     color: #00196E!important;
     border-radius:23px!important;
 }
+.NewpostButton:hover{
+    background-color: #f2b500!important;
+}
 .modalButton{
     width: 5rem!important;
     background-color: #FFC300!important;

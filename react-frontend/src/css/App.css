@@ -69,6 +69,15 @@
   border-color: rgba(196,196,196,15%)!important;
   color: #00196E!important;
   border-radius:23px!important;
+  -webkit-box-shadow: 0px 0px 12px -1px rgba(203,203,203,0.8)!important;
+  box-shadow: 0px 0px 12px -1px rgba(203,203,203,0.8)!important;
+}
+.logSignButton:hover, .signlogbut:hover{
+  background-color: #00196E!important;
+  color: white!important;
+  cursor:pointer!important;
+  -webkit-box-shadow: 0px 0px 12px -1px rgba(0,25,110,0.62)!important;
+  box-shadow: 0px 0px 12px -1px rgba(0,25,110,0.62)!important;
 }
 .logSignButton:active{
   outline-color: black!important;
@@ -83,3 +92,4 @@
   background-color: #00196E !important;
   border: none!important;
 }
+
